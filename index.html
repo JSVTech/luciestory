@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lucčin příběh</title>
 
   <style>
@@ -13,1653 +12,600 @@
 
     body {
       margin: 0;
-      background: #05070b;
+      background: #070a12;
       color: white;
       font-family: Arial, Helvetica, sans-serif;
     }
 
-    #game {
-      width: 100%;
+    .app {
       min-height: 100vh;
-      position: relative;
-      overflow: hidden;
-      background: #090b10;
-    }
-
-    /* =========================
-       HLAVNÍ SCÉNA
-    ========================== */
-
-    #scene {
-      min-height: 100vh;
-
-      background-image:
-        linear-gradient(
-          to bottom,
-          rgba(0,0,0,.12),
-          rgba(0,0,0,.20) 45%,
-          rgba(0,0,0,.70)
-        ),
-        url("assets/dymkarna.png");
-
-      background-size: cover;
-      background-position: center;
-      position: relative;
-    }
-
-    /* =========================
-       KAPITOLA
-    ========================== */
-
-    #chapterBox {
-      position: absolute;
-      top: 25px;
-      left: 30px;
-
-      background: rgba(5, 8, 15, .82);
-      border-left: 4px solid #ff7698;
-
-      padding: 13px 18px;
-
-      border-radius: 0 10px 10px 0;
-
-      backdrop-filter: blur(8px);
-    }
-
-    #chapterNumber {
-      color: #ff8da9;
-      font-size: 12px;
-      letter-spacing: 2px;
-    }
-
-    #chapterTitle {
-      font-size: 25px;
-      font-weight: 800;
-      margin-top: 4px;
-    }
-
-    /* =========================
-       DIALOG
-    ========================== */
-
-    #dialogArea {
-      position: absolute;
-
-      width: min(930px, calc(100% - 30px));
-
-      left: 50%;
-      bottom: 25px;
-
-      transform: translateX(-50%);
-    }
-
-    #dialogBox {
-      background: rgba(5, 8, 15, .94);
-
-      border: 1px solid rgba(255,255,255,.17);
-
-      border-radius: 15px;
-
-      padding: 21px;
-
-      backdrop-filter: blur(10px);
-
-      box-shadow:
-        0 20px 70px rgba(0,0,0,.55);
-    }
-
-    #speaker {
-      font-size: 14px;
-      font-weight: bold;
-
-      color: #ff86a5;
-
-      letter-spacing: 1px;
-
-      text-transform: uppercase;
-
-      margin-bottom: 9px;
-    }
-
-    #dialogText {
-      font-size: 20px;
-      line-height: 1.55;
-
-      min-height: 60px;
-    }
-
-    /* =========================
-       VOLBY LUCKY
-    ========================== */
-
-    #choices {
-      margin-top: 15px;
-
-      display: grid;
-
-      gap: 10px;
-    }
-
-    .choice {
-      width: 100%;
-
-      background: rgba(19, 23, 34, .96);
-
-      color: white;
-
-      border:
-        1px solid rgba(255,255,255,.22);
-
-      border-radius: 11px;
-
-      padding: 15px 17px;
-
-      font-size: 17px;
-
-      text-align: left;
-
-      cursor: pointer;
-
-      transition: .2s;
-    }
-
-    .choice:hover {
-      transform: translateY(-2px);
-
-      border-color: #ff7698;
-
-      background: rgba(54, 28, 41, .98);
-    }
-
-    .choice.romantic {
-      border-color: rgba(255, 118, 152, .65);
-    }
-
-    /* =========================
-       POKRAČOVAT
-    ========================== */
-
-    #continueBtn {
-      display: none;
-
-      margin-top: 14px;
-      margin-left: auto;
-
-      background: #ff7698;
-
-      color: #111;
-
-      border: 0;
-
-      padding: 12px 19px;
-
-      border-radius: 9px;
-
-      cursor: pointer;
-
-      font-size: 16px;
-      font-weight: bold;
-    }
-
-    #continueBtn:hover {
-      background: #ff92ac;
-    }
-
-    /* =========================
-       FADE
-    ========================== */
-
-    #fade {
-      pointer-events: none;
-
-      position: absolute;
-
-      inset: 0;
-
-      background: black;
-
-      opacity: 0;
-
-      transition: opacity .55s;
-
-      z-index: 20;
-    }
-
-    /* =========================
-       START SCREEN
-    ========================== */
-
-    #startScreen {
-      position: absolute;
-      inset: 0;
-
-      background:
-        linear-gradient(
-          rgba(3,5,10,.45),
-          rgba(3,5,10,.82)
-        );
-
-      z-index: 30;
-
       display: flex;
-
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-
-      text-align: center;
-
-      padding: 30px;
+      padding: 16px;
+      gap: 12px;
     }
 
-    #startContent {
-      max-width: 650px;
+    .topbar {
+      width: min(1600px, 100%);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
-    #startContent h1 {
-      font-size: clamp(42px, 8vw, 85px);
-
-      margin: 0;
-
+    .title {
       font-weight: 800;
+      font-size: 22px;
     }
 
-    #startContent h1 span {
-      color: #ff809f;
+    .subtitle {
+      color: #9ca3af;
+      font-size: 14px;
     }
 
-    #startContent p {
-      margin-top: 12px;
+    .debug-btn {
+      background: #111827;
+      color: white;
+      border: 1px solid #374151;
+      border-radius: 10px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-size: 14px;
+    }
 
-      color: #ddd;
+    .debug-btn:hover {
+      background: #1f2937;
+    }
 
+    .stage {
+      position: relative;
+      width: min(1600px, 100%);
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,.45);
+    }
+
+    #sceneImage {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: #000;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    #overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+    }
+
+    .zone {
+      position: absolute;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .zone.debug {
+      outline: 2px dashed rgba(255, 60, 60, 0.95);
+      background: rgba(255, 60, 60, 0.16);
+    }
+
+    .panel {
+      position: absolute;
+      inset: 0;
+      z-index: 20;
+      background: rgba(4, 7, 15, .82);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .panel.hidden {
+      display: none;
+    }
+
+    .panel-box {
+      max-width: 760px;
+      background: rgba(10, 15, 28, .9);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 15px 40px rgba(0,0,0,.35);
+    }
+
+    .panel-box h1 {
+      margin: 0 0 10px 0;
+      font-size: clamp(30px, 5vw, 56px);
+    }
+
+    .panel-box p {
+      margin: 0;
+      color: #d1d5db;
+      line-height: 1.6;
       font-size: 18px;
+    }
 
+    .panel-actions {
+      margin-top: 22px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .panel-actions button {
+      border: 0;
+      border-radius: 12px;
+      padding: 14px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .primary {
+      background: #f5d66d;
+      color: #111827;
+    }
+
+    .secondary {
+      background: #1f2937;
+      color: white;
+      border: 1px solid #374151;
+    }
+
+    .hint {
+      width: min(1600px, 100%);
+      color: #9ca3af;
+      font-size: 13px;
       line-height: 1.5;
     }
 
-    #startBtn {
-      margin-top: 25px;
-
-      border: 0;
-
-      background: #ff7698;
-
-      padding: 15px 28px;
-
-      border-radius: 10px;
-
-      font-size: 18px;
-
-      font-weight: bold;
-
-      cursor: pointer;
-    }
-
-    /* =========================
-       END SCREEN
-    ========================== */
-
-    #endScreen {
-      display: none;
-
-      position: absolute;
-
-      inset: 0;
-
-      z-index: 40;
-
-      background: rgba(3,5,10,.94);
-
-      align-items: center;
-      justify-content: center;
-
-      padding: 30px;
-
-      text-align: center;
-    }
-
-    #endContent {
-      max-width: 700px;
-    }
-
-    #endTitle {
-      font-size: clamp(34px, 7vw, 65px);
-    }
-
-    #endText {
-      font-size: 19px;
-      color: #ccc;
-      line-height: 1.6;
-    }
-
-    #restartBtn {
-      margin-top: 25px;
-
-      border: 0;
-
-      background: #ff7698;
-
-      padding: 14px 22px;
-
-      border-radius: 9px;
-
-      cursor: pointer;
-
-      font-size: 16px;
-      font-weight: bold;
-    }
-
-    /* =========================
-       MOBIL
-    ========================== */
-
-    @media (max-width: 650px) {
-
-      #scene {
-        background-position: center;
+    @media (max-width: 900px) {
+      .app {
+        padding: 10px;
       }
 
-      #chapterBox {
-        left: 15px;
-        top: 15px;
+      .title {
+        font-size: 18px;
       }
 
-      #chapterTitle {
-        font-size: 20px;
+      .subtitle {
+        font-size: 12px;
       }
 
-      #dialogArea {
-        bottom: 15px;
+      .panel-box {
+        padding: 20px;
       }
 
-      #dialogBox {
-        padding: 16px;
-      }
-
-      #dialogText {
-        font-size: 17px;
-      }
-
-      .choice {
-        font-size: 15px;
+      .panel-box p {
+        font-size: 16px;
       }
     }
-
   </style>
 </head>
-
-
 <body>
 
-<div id="game">
-
-  <!-- HLAVNÍ SCÉNA -->
-
-  <div id="scene">
-
-    <div id="chapterBox">
-
-      <div id="chapterNumber">
-        KAPITOLA 1
+  <div class="app">
+    <div class="topbar">
+      <div>
+        <div class="title">Lucčin příběh</div>
+        <div class="subtitle">Kapitola 1 – Dýmkárna</div>
       </div>
 
-      <div id="chapterTitle">
-        Dýmkárna
+      <button class="debug-btn" id="debugBtn">Debug zóny: vypnuto</button>
+    </div>
+
+    <div class="stage">
+      <img id="sceneImage" src="assets/d1.png" alt="Scéna hry" />
+      <div id="overlay"></div>
+
+      <div class="panel" id="startScreen">
+        <div class="panel-box">
+          <h1>Lucčin příběh</h1>
+          <p>
+            Tohle je první interaktivní kapitola.
+            <br><br>
+            Hráč hraje za Lucku a kliká přímo na volby,
+            které už jsou nakreslené uvnitř obrázků.
+          </p>
+
+          <div class="panel-actions">
+            <button class="primary" id="startBtn">Začít hru</button>
+          </div>
+        </div>
       </div>
 
-    </div>
+      <div class="panel hidden" id="endScreen">
+        <div class="panel-box">
+          <h1 id="endTitle">Konec</h1>
+          <p id="endText"></p>
 
-
-    <div id="dialogArea">
-
-      <div id="dialogBox">
-
-        <div id="speaker">
-          Vypravěč
+          <div class="panel-actions">
+            <button class="primary" id="restartBtn">Hrát znovu</button>
+            <button class="secondary" id="closeEndBtn">Zavřít</button>
+          </div>
         </div>
-
-        <div id="dialogText">
-        </div>
-
-        <div id="choices">
-        </div>
-
-        <button id="continueBtn">
-          Pokračovat →
-        </button>
-
       </div>
-
     </div>
 
-  </div>
-
-
-  <!-- FADE -->
-
-  <div id="fade"></div>
-
-
-  <!-- START -->
-
-  <div id="startScreen">
-
-    <div id="startContent">
-
-      <h1>
-        Lucčin <span>příběh</span>
-      </h1>
-
-      <p>
-        Některé večery začnou jako obyčejné rozloučení.
-        <br>
-        A některé změní úplně všechno.
-      </p>
-
-      <button id="startBtn">
-        Začít příběh
-      </button>
-
+    <div class="hint">
+      Když by klikací zóny neseděly úplně přesně, klikni na <b>Debug zóny</b>.
+      Ukážou se červené obdélníky a můžeš si je pak případně doladit v kódu.
     </div>
-
   </div>
 
+  <script>
+    const sceneImage = document.getElementById("sceneImage");
+    const overlay = document.getElementById("overlay");
+    const debugBtn = document.getElementById("debugBtn");
 
-  <!-- KONEC -->
+    const startScreen = document.getElementById("startScreen");
+    const endScreen = document.getElementById("endScreen");
+    const endTitle = document.getElementById("endTitle");
+    const endText = document.getElementById("endText");
 
-  <div id="endScreen">
+    let debug = false;
 
-    <div id="endContent">
+    const state = {
+      closeness: 0,
+      trust: 0,
+      independence: 0,
+      relationship: 0
+    };
 
-      <h1 id="endTitle">
-      </h1>
+    // ---------- Klikací zóny ----------
+    // hodnoty jsou v procentech vzhledem k obrázku
 
-      <p id="endText">
-      </p>
+    const ZONES = {
+      // Spodní 3 tlačítka
+      choiceLeft:   { left: 3.6, top: 89.0, width: 28.8, height: 7.4 },
+      choiceMiddle: { left: 35.4, top: 89.0, width: 28.8, height: 7.4 },
+      choiceRight:  { left: 67.1, top: 89.0, width: 28.8, height: 7.4 },
 
-      <button id="restartBtn">
-        Hrát kapitolu znovu
-      </button>
+      // Pokračovat uprostřed dole
+      continueCenter: { left: 37.2, top: 90.2, width: 25.6, height: 6.2 },
 
-    </div>
+      // Pokračovat vpravo dole
+      continueRight: { left: 76.0, top: 82.5, width: 18.7, height: 8.3 }
+    };
 
-  </div>
+    // ---------- Scény ----------
+    const scenes = {
+      d1: {
+        image: "assets/d1.png",
+        zones: [
+          {
+            ...ZONES.choiceLeft,
+            action: () => {
+              state.closeness += 1;
+              loadScene("d2");
+            }
+          },
+          {
+            ...ZONES.choiceMiddle,
+            action: () => {
+              state.closeness += 2;
+              state.relationship += 1;
+              loadScene("d2");
+            }
+          },
+          {
+            ...ZONES.choiceRight,
+            action: () => {
+              state.independence += 1;
+              loadScene("d2");
+            }
+          }
+        ]
+      },
 
-</div>
+      d2: {
+        image: "assets/d2.png",
+        zones: [
+          {
+            ...ZONES.choiceLeft,
+            action: () => {
+              state.closeness += 3;
+              state.relationship += 2;
+              loadScene("d3");
+            }
+          },
+          {
+            ...ZONES.choiceMiddle,
+            action: () => {
+              state.trust += 1;
+              loadScene("d4");
+            }
+          },
+          {
+            ...ZONES.choiceRight,
+            action: () => {
+              state.independence += 3;
+              state.relationship -= 2;
+              loadScene("d7");
+            }
+          }
+        ]
+      },
 
+      // Polibek
+      d3: {
+        image: "assets/d3.png",
+        zones: [
+          {
+            ...ZONES.continueRight,
+            action: () => {
+              state.closeness += 2;
+              loadScene("d5");
+            }
+          }
+        ]
+      },
 
-<script>
+      // Jarda se přizná
+      d4: {
+        image: "assets/d4.png",
+        zones: [
+          {
+            ...ZONES.choiceLeft,
+            action: () => {
+              state.closeness += 3;
+              state.relationship += 2;
+              loadScene("d3");
+            }
+          },
+          {
+            ...ZONES.choiceMiddle,
+            action: () => {
+              state.trust += 2;
+              loadScene("d5");
+            }
+          },
+          {
+            ...ZONES.choiceRight,
+            action: () => {
+              state.independence += 2;
+              loadScene("d6");
+            }
+          }
+        ]
+      },
 
-  /* ===================================
-     ELEMENTY
-  =================================== */
+      // U stolu spolu
+      d5: {
+        image: "assets/d5.png",
+        zones: [
+          {
+            ...ZONES.choiceLeft,
+            action: () => {
+              state.relationship += 3;
+              state.trust += 2;
+              loadScene("d8");
+            }
+          },
+          {
+            ...ZONES.choiceMiddle,
+            action: () => {
+              state.trust += 1;
+              state.independence += 1;
+              loadScene("d9");
+            }
+          },
+          {
+            ...ZONES.choiceRight,
+            action: () => {
+              state.independence += 3;
+              state.relationship -= 1;
+              loadScene("d6");
+            }
+          }
+        ]
+      },
 
-  const speaker =
-    document.getElementById("speaker");
+      // Tichý návrat ke kolegům / Jarda sám
+      d6: {
+        image: "assets/d6.png",
+        zones: [
+          {
+            ...ZONES.continueCenter,
+            action: () => {
+              loadScene("d9");
+            }
+          }
+        ]
+      },
 
-  const dialogText =
-    document.getElementById("dialogText");
+      // Přímé odmítnutí
+      d7: {
+        image: "assets/d7.png",
+        zones: [
+          {
+            ...ZONES.continueRight,
+            action: () => {
+              state.independence += 2;
+              loadScene("d6");
+            }
+          }
+        ]
+      },
 
-  const choices =
-    document.getElementById("choices");
+      // Romantičtější konec večera
+      d8: {
+        image: "assets/d8.png",
+        zones: [
+          {
+            ...ZONES.continueCenter,
+            action: () => {
+              loadScene("d10");
+            }
+          }
+        ]
+      },
 
-  const continueBtn =
-    document.getElementById("continueBtn");
+      // Tišší / nejistý konec večera
+      d9: {
+        image: "assets/d9.png",
+        zones: [
+          {
+            ...ZONES.continueCenter,
+            action: () => {
+              loadScene("d10");
+            }
+          }
+        ]
+      },
 
-  const chapterTitle =
-    document.getElementById("chapterTitle");
-
-  const fade =
-    document.getElementById("fade");
-
-
-  /* ===================================
-     SKRYTÝ STAV HRY
-
-     Lucka tyto hodnoty NEVIDÍ.
-     Později z nich budeme počítat ending.
-  =================================== */
-
-  let state = {
-
-    closeness: 0,
-
-    trust: 0,
-
-    independence: 0,
-
-    relationship: 0
-
-  };
-
-
-  /* ===================================
-     DIALOG
-  =================================== */
-
-  let nextFunction = null;
-
-
-  function say(who, message, next = null) {
-
-    speaker.innerText = who;
-
-    dialogText.innerText = message;
-
-    choices.innerHTML = "";
-
-    nextFunction = next;
-
-
-    if (next) {
-
-      continueBtn.style.display =
-        "block";
-
-    } else {
-
-      continueBtn.style.display =
-        "none";
-
-    }
-
-  }
-
-
-  function choose(who, message, options) {
-
-    speaker.innerText = who;
-
-    dialogText.innerText = message;
-
-    choices.innerHTML = "";
-
-    continueBtn.style.display =
-      "none";
-
-
-    options.forEach(option => {
-
-      const button =
-        document.createElement("button");
-
-
-      button.className =
-        "choice";
-
-
-      if (option.romantic) {
-
-        button.classList.add(
-          "romantic"
-        );
-
+      // Messenger
+      d10: {
+        image: "assets/d10.png",
+        zones: [
+          {
+            ...ZONES.choiceLeft,
+            action: () => {
+              state.relationship += 2;
+              showEnding(
+                "KAPITOLA 2 ODEMČENA",
+                "Boskovice. Benzinka. Tentokrát už bez kolegů kolem. Lucka dala dalšímu setkání šanci a příběh pokračuje dál."
+              );
+            }
+          },
+          {
+            ...ZONES.choiceMiddle,
+            action: () => {
+              state.trust += 1;
+              state.independence += 1;
+              showEnding(
+                "POMALEJŠÍ CESTA",
+                "Lucka ho úplně neodmítla, ale všechno se bude vyvíjet opatrněji. Další kapitola může začít jinak a pomaleji."
+              );
+            }
+          },
+          {
+            ...ZONES.choiceRight,
+            action: () => {
+              state.independence += 3;
+              state.relationship -= 3;
+              showEnding(
+                "PŘÍBĚH, KTERÝ NEZAČAL",
+                "Tentokrát první setkání v Boskovicích nikdy nepřišlo. Jeden večer, pár rozhodnutí a úplně jiná budoucnost."
+              );
+            }
+          }
+        ]
       }
+    };
 
-
-      button.innerText =
-        option.text;
-
-
-      button.onclick = () => {
-
-        if (option.effects) {
-
-          Object.entries(
-            option.effects
-          ).forEach(([key, value]) => {
-
-            state[key] += value;
-
-          });
-
-        }
-
-
-        option.action();
-
-      };
-
-
-      choices.appendChild(
-        button
-      );
-
-    });
-
-  }
-
-
-  continueBtn.onclick = () => {
-
-    if (nextFunction) {
-
-      nextFunction();
-
+    // ---------- Funkce ----------
+    function applyZoneStyle(el, zone) {
+      el.style.left = zone.left + "%";
+      el.style.top = zone.top + "%";
+      el.style.width = zone.width + "%";
+      el.style.height = zone.height + "%";
     }
 
-  };
-
-
-  /* ===================================
-     PŘECHOD
-  =================================== */
-
-  function transition(callback) {
-
-    fade.style.opacity = 1;
-
-
-    setTimeout(() => {
-
-      callback();
-
-      fade.style.opacity = 0;
-
-    }, 550);
-
-  }
-
-
-  /* ===================================
-     START
-  =================================== */
-
-  document
-    .getElementById("startBtn")
-    .onclick = () => {
-
-      document
-        .getElementById("startScreen")
-        .style.display = "none";
-
-
-      intro();
-
-    };
-
-
-  /* ===================================
-     ÚVOD
-  =================================== */
-
-  function intro() {
-
-    say(
-
-      "Vypravěč",
-
-      "Dnes se máš oficiálně rozloučit s bývalými kolegy. Končí jedna pracovní kapitola a večer se všichni scházejí v Dýmkárně.",
-
-      intro2
-
-    );
-
-  }
-
-
-  function intro2() {
-
-    say(
-
-      "Vypravěč",
-
-      "Přicházíš dovnitř se svými kolegy a sedáš si k nim. Mezi lidmi je ale někdo, kdo se na dnešní večer těšil možná o trochu víc než ostatní.",
-
-      jardaArrival
-
-    );
-
-  }
-
-
-  function jardaArrival() {
-
-    say(
-
-      "Vypravěč",
-
-      "Jarda.",
-
-      looks1
-
-    );
-
-  }
-
-
-  /* ===================================
-     POHLEDY
-  =================================== */
-
-  function looks1() {
-
-    say(
-
-      "Vypravěč",
-
-      "Večer pomalu plyne. Hudba, drinky, rozhovory. Sedíš vedle kolegů a několikrát si všimneš, že se na tebe Jarda dívá.",
-
-      looks2
-
-    );
-
-  }
-
-
-  function looks2() {
-
-    choose(
-
-      "Lucie",
-
-      "Jak zareaguješ?",
-
-      [
-
-        {
-
-          text:
-            "🙂 Podívám se na něj zpátky.",
-
-          effects: {
-
-            closeness: 1
-
-          },
-
-          action: looksBack
-
-        },
-
-        {
-
-          text:
-            "😏 Podržím jeho pohled o něco déle.",
-
-          romantic: true,
-
-          effects: {
-
-            closeness: 2,
-            relationship: 1
-
-          },
-
-          action: looksLong
-
-        },
-
-        {
-
-          text:
-            "🙈 Budu se raději věnovat kolegům.",
-
-          effects: {
-
-            independence: 1
-
-          },
-
-          action: looksAway
-
-        }
-
-      ]
-
-    );
-
-  }
-
-
-  function looksBack() {
-
-    say(
-
-      "Vypravěč",
-
-      "Na chvíli se vaše oči potkají. Pak pokračuješ v rozhovoru. O pár minut později se to stane znovu.",
-
-      toilet
-
-    );
-
-  }
-
-
-  function looksLong() {
-
-    say(
-
-      "Vypravěč",
-
-      "Tentokrát neuhneš hned. Jarda také ne. Nikdo nic neříká, ale oba jste si toho pohledu všimli.",
-
-      toilet
-
-    );
-
-  }
-
-
-  function looksAway() {
-
-    say(
-
-      "Vypravěč",
-
-      "Raději se vrátíš ke kolegům. Jenže i tak si během večera několikrát všimneš, že tě Jarda pořád sleduje pohledem.",
-
-      toilet
-
-    );
-
-  }
-
-
-  /* ===================================
-     ZÁCHODY
-  =================================== */
-
-  function toilet() {
-
-    transition(() => {
-
-      chapterTitle.innerText =
-        "Před záchody";
-
-
-      say(
-
-        "Vypravěč",
-
-        "Později večer vstaneš a jdeš na záchod. Když se vracíš zpátky, venku na chodbě stojí Jarda.",
-
-        toilet2
-
-      );
-
+    function renderZones(zoneList) {
+      overlay.innerHTML = "";
+
+      zoneList.forEach(zone => {
+        const btn = document.createElement("button");
+        btn.className = "zone";
+        if (debug) btn.classList.add("debug");
+
+        applyZoneStyle(btn, zone);
+
+        btn.addEventListener("click", zone.action);
+
+        overlay.appendChild(btn);
+      });
+    }
+
+    function loadScene(sceneKey) {
+      const scene = scenes[sceneKey];
+      if (!scene) return;
+
+      sceneImage.src = scene.image;
+      renderZones(scene.zones);
+    }
+
+    function showEnding(title, text) {
+      endTitle.textContent = title;
+      endText.textContent = text;
+      endScreen.classList.remove("hidden");
+    }
+
+    function restartGame() {
+      state.closeness = 0;
+      state.trust = 0;
+      state.independence = 0;
+      state.relationship = 0;
+
+      endScreen.classList.add("hidden");
+      startScreen.classList.remove("hidden");
+      overlay.innerHTML = "";
+      sceneImage.src = "assets/d1.png";
+    }
+
+    // ---------- Start ----------
+    document.getElementById("startBtn").addEventListener("click", () => {
+      startScreen.classList.add("hidden");
+      loadScene("d1");
     });
 
-  }
+    document.getElementById("restartBtn").addEventListener("click", restartGame);
 
-
-  function toilet2() {
-
-    say(
-
-      "Vypravěč",
-
-      "Stojíte proti sobě. Jarda očividně něco chce říct. Jenže z něj nevypadne ani jediné slovo.",
-
-      firstBigChoice
-
-    );
-
-  }
-
-
-  /* ===================================
-     PRVNÍ VELKÁ VOLBA
-
-     HRÁČ = LUCIE
-  =================================== */
-
-  function firstBigChoice() {
-
-    choose(
-
-      "Lucie",
-
-      "Co uděláš?",
-
-      [
-
-        {
-
-          text:
-            "❤️ Přiblížím se k němu.",
-
-          romantic: true,
-
-          effects: {
-
-            closeness: 3,
-            relationship: 2,
-            trust: 1
-
-          },
-
-          action: kiss
-
-        },
-
-        {
-
-          text:
-            "🙂 „Chtěl jsi mi něco říct?“",
-
-          effects: {
-
-            trust: 1
-
-          },
-
-          action: makeHimTalk
-
-        },
-
-        {
-
-          text:
-            "✋ „Jardo… nechci, aby mezi námi něco bylo.“",
-
-          effects: {
-
-            independence: 3,
-            relationship: -2
-
-          },
-
-          action: reject
-
-        }
-
-      ]
-
-    );
-
-  }
-
-
-  /* ===================================
-     PUSA
-  =================================== */
-
-  function kiss() {
-
-    say(
-
-      "Vypravěč",
-
-      "Uděláš krok k Jardovi. On se přiblíží také. Ani jeden z vás nic neřekne.",
-
-      kiss2
-
-    );
-
-  }
-
-
-  function kiss2() {
-
-    say(
-
-      "Vypravěč",
-
-      "A pak se prostě políbíte.",
-
-      kiss3
-
-    );
-
-  }
-
-
-  function kiss3() {
-
-    say(
-
-      "Vypravěč",
-
-      "Po chvíli se společně vrátíte zpátky mezi ostatní.",
-
-      sitTogether
-
-    );
-
-  }
-
-
-  function sitTogether() {
-
-    choose(
-
-      "Lucie",
-
-      "Kam si sedneš?",
-
-      [
-
-        {
-
-          text:
-            "❤️ Sednu si vedle Jardy.",
-
-          romantic: true,
-
-          effects: {
-
-            closeness: 2,
-            relationship: 1
-
-          },
-
-          action: sofaTalk
-
-        },
-
-        {
-
-          text:
-            "🙂 Sednu si k němu, ale chci si hlavně promluvit.",
-
-          effects: {
-
-            trust: 2
-
-          },
-
-          action: sofaTalk
-
-        },
-
-        {
-
-          text:
-            "🌙 Vrátím se ke kolegům. Potřebuju si to srovnat.",
-
-          effects: {
-
-            independence: 2
-
-          },
-
-          action: messengerLater
-
-        }
-
-      ]
-
-    );
-
-  }
-
-
-  /* ===================================
-     JARDA MLUVÍ
-  =================================== */
-
-  function makeHimTalk() {
-
-    say(
-
-      "Jarda",
-
-      "Jo… chtěl.",
-
-      makeHimTalk2
-
-    );
-
-  }
-
-
-  function makeHimTalk2() {
-
-    say(
-
-      "Jarda",
-
-      "Jen vůbec nevím, jak to říct.",
-
-      makeHimTalk3
-
-    );
-
-  }
-
-
-  function makeHimTalk3() {
-
-    say(
-
-      "Jarda",
-
-      "Líbíš se mi. Asi víc, než bych chtěl přiznat.",
-
-      lucieReaction
-
-    );
-
-  }
-
-
-  function lucieReaction() {
-
-    choose(
-
-      "Lucie",
-
-      "Co uděláš?",
-
-      [
-
-        {
-
-          text:
-            "❤️ Políbím ho.",
-
-          romantic: true,
-
-          effects: {
-
-            closeness: 3,
-            relationship: 2
-
-          },
-
-          action: kiss3
-
-        },
-
-        {
-
-          text:
-            "🙂 „Pojď si o tom radši sednout.“",
-
-          effects: {
-
-            trust: 2
-
-          },
-
-          action: sofaTalk
-
-        },
-
-        {
-
-          text:
-            "🌙 „Dneska to nechme být.“",
-
-          effects: {
-
-            independence: 2
-
-          },
-
-          action: messengerLater
-
-        }
-
-      ]
-
-    );
-
-  }
-
-
-  /* ===================================
-     SEZENÍ VEDLE SEBE
-  =================================== */
-
-  function sofaTalk() {
-
-    say(
-
-      "Vypravěč",
-
-      "Sedíte vedle sebe. Jarda tě občas pohladí a začnete se bavit otevřeněji o tom, co mezi vámi vlastně je.",
-
-      homeTalk
-
-    );
-
-  }
-
-
-  function homeTalk() {
-
-    say(
-
-      "Lucie",
-
-      "Ale nejdřív si musíš vyřešit to, co máš doma.",
-
-      homeTalk2
-
-    );
-
-  }
-
-
-  function homeTalk2() {
-
-    say(
-
-      "Jarda",
-
-      "Já vím.",
-
-      homeChoice
-
-    );
-
-  }
-
-
-  function homeChoice() {
-
-    choose(
-
-      "Lucie",
-
-      "Co mu řekneš?",
-
-      [
-
-        {
-
-          text:
-            "❤️ „Až to vyřešíš, můžeme zkusit, co z toho bude.“",
-
-          romantic: true,
-
-          effects: {
-
-            relationship: 3,
-            trust: 2
-
-          },
-
-          action: bolt
-
-        },
-
-        {
-
-          text:
-            "🙂 „Uvidíme. Nechci nic slibovat.“",
-
-          effects: {
-
-            independence: 2,
-            trust: 1
-
-          },
-
-          action: bolt
-
-        },
-
-        {
-
-          text:
-            "🌙 „Možná bychom to měli nechat jen tady.“",
-
-          effects: {
-
-            independence: 3,
-            relationship: -1
-
-          },
-
-          action: bolt
-
-        }
-
-      ]
-
-    );
-
-  }
-
-
-  /* ===================================
-     ODMÍTNUTÍ
-  =================================== */
-
-  function reject() {
-
-    say(
-
-      "Lucie",
-
-      "Jsi fajn. Ale nechci, abys to pochopil jinak.",
-
-      reject2
-
-    );
-
-  }
-
-
-  function reject2() {
-
-    say(
-
-      "Vypravěč",
-
-      "Jarda chvíli mlčí.",
-
-      reject3
-
-    );
-
-  }
-
-
-  function reject3() {
-
-    say(
-
-      "Jarda",
-
-      "Dobře.",
-
-      messengerLater
-
-    );
-
-  }
-
-
-  /* ===================================
-     BOLT
-  =================================== */
-
-  function bolt() {
-
-    transition(() => {
-
-      chapterTitle.innerText =
-        "Konec večera";
-
-
-      say(
-
-        "Vypravěč",
-
-        "Večer končí. Venku už čeká Bolt. Jarda jde s tebou ven.",
-
-        bolt2
-
-      );
-
+    document.getElementById("closeEndBtn").addEventListener("click", () => {
+      endScreen.classList.add("hidden");
     });
 
-  }
+    // ---------- Debug ----------
+    function refreshDebugState() {
+      debugBtn.textContent = debug ? "Debug zóny: zapnuto" : "Debug zóny: vypnuto";
 
+      const zones = document.querySelectorAll(".zone");
+      zones.forEach(z => {
+        z.classList.toggle("debug", debug);
+      });
+    }
 
-  function bolt2() {
-
-    say(
-
-      "Vypravěč",
-
-      "Než nastoupíš, Jarda tě pevně obejme.",
-
-      boltChoice
-
-    );
-
-  }
-
-
-  function boltChoice() {
-
-    choose(
-
-      "Lucie",
-
-      "Jak zareaguješ?",
-
-      [
-
-        {
-
-          text:
-            "❤️ Obejmu ho stejně silně.",
-
-          romantic: true,
-
-          effects: {
-
-            closeness: 2,
-            relationship: 1
-
-          },
-
-          action: chapterTwo
-
-        },
-
-        {
-
-          text:
-            "🙂 Obejmu ho a usměju se.",
-
-          effects: {
-
-            trust: 1
-
-          },
-
-          action: chapterTwo
-
-        },
-
-        {
-
-          text:
-            "🌙 Rozloučím se a nastoupím do auta.",
-
-          effects: {
-
-            independence: 1
-
-          },
-
-          action: chapterTwo
-
-        }
-
-      ]
-
-    );
-
-  }
-
-
-  /* ===================================
-     MESSENGER
-  =================================== */
-
-  function messengerLater() {
-
-    transition(() => {
-
-      chapterTitle.innerText =
-        "O pár dní později";
-
-
-      say(
-
-        "Vypravěč",
-
-        "Dýmkárna skončila jinak. O pár dní později se ti na Messengeru objeví zpráva.",
-
-        messengerMessage
-
-      );
-
+    debugBtn.addEventListener("click", () => {
+      debug = !debug;
+      refreshDebugState();
     });
 
-  }
-
-
-  function messengerMessage() {
-
-    say(
-
-      "Jarda",
-
-      "Ahoj… vím, jak ten večer dopadl. Ale stejně bych tě rád někdy viděl.",
-
-      messengerDecision
-
-    );
-
-  }
-
-
-  function messengerDecision() {
-
-    choose(
-
-      "Lucie",
-
-      "Co mu odpovíš?",
-
-      [
-
-        {
-
-          text:
-            "❤️ „Tak jo. Můžeme se vidět.“",
-
-          romantic: true,
-
-          effects: {
-
-            relationship: 2,
-            trust: 1
-
-          },
-
-          action: chapterTwo
-
-        },
-
-        {
-
-          text:
-            "🙂 „Můžeme si psát. Uvidíme.“",
-
-          effects: {
-
-            trust: 1,
-            independence: 1
-
-          },
-
-          action: slowChapterTwo
-
-        },
-
-        {
-
-          text:
-            "✋ „Promiň. Nechci.“",
-
-          effects: {
-
-            independence: 3,
-            relationship: -3
-
-          },
-
-          action: storyDidNotStart
-
-        }
-
-      ]
-
-    );
-
-  }
-
-
-  /* ===================================
-     KAPITOLA 2
-  =================================== */
-
-  function chapterTwo() {
-
-    showEnding(
-
-      "KAPITOLA 2",
-
-      "Boskovice. Benzinka. Tentokrát už bez kolegů kolem. Příběh pokračuje…"
-
-    );
-
-  }
-
-
-  function slowChapterTwo() {
-
-    showEnding(
-
-      "KAPITOLA 2",
-
-      "Jarda dostal ještě jednu šanci. První setkání v Boskovicích ale tentokrát začne trochu jinak."
-
-    );
-
-  }
-
-
-  /* ===================================
-     PŘEDČASNÝ KONEC
-  =================================== */
-
-  function storyDidNotStart() {
-
-    showEnding(
-
-      "PŘÍBĚH, KTERÝ NEZAČAL",
-
-      "Tentokrát se první setkání v Boskovicích nikdy nestalo. Jeden večer. Jedno rozhodnutí. Úplně jiný příběh."
-
-    );
-
-  }
-
-
-  /* ===================================
-     END SCREEN
-  =================================== */
-
-  function showEnding(title, message) {
-
-    document
-      .getElementById("endTitle")
-      .innerText = title;
-
-
-    document
-      .getElementById("endText")
-      .innerText = message;
-
-
-    document
-      .getElementById("endScreen")
-      .style.display = "flex";
-
-  }
-
-
-  document
-    .getElementById("restartBtn")
-    .onclick = () => {
-
-      location.reload();
-
-    };
-
-</script>
-
+    document.addEventListener("keydown", e => {
+      if (e.key.toLowerCase() === "d") {
+        debug = !debug;
+        refreshDebugState();
+      }
+    });
+
+    // ---------- Preload ----------
+    [
+      "assets/d1.png",
+      "assets/d2.png",
+      "assets/d3.png",
+      "assets/d4.png",
+      "assets/d5.png",
+      "assets/d6.png",
+      "assets/d7.png",
+      "assets/d8.png",
+      "assets/d9.png",
+      "assets/d10.png"
+    ].forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+  </script>
 </body>
 </html>

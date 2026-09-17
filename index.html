@@ -91,21 +91,28 @@
     ========================== */
 
     .stage {
-      position: relative;
+  position: relative;
+  width: min(1672px, 100%);
+  background: black;
+  overflow: hidden;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}
 
-      width: min(1536px, 100%);
+#sceneImage {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
 
-      aspect-ratio: 3 / 2;
-
-      background: black;
-
-      overflow: hidden;
-
-      border-radius: 14px;
-
-      box-shadow:
-        0 20px 60px rgba(0,0,0,.5);
-    }
+#overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
 
 
     /* =========================

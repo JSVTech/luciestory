@@ -86,10 +86,6 @@
 
     /* =========================
        HERNÍ PLOCHA
-
-       DŮLEŽITÉ:
-       ŽÁDNÝ aspect-ratio.
-       Výška se bere přímo z obrázku.
     ========================== */
 
     .stage {
@@ -124,9 +120,6 @@
 
     /* =========================
        KLIKACÍ VRSTVA
-
-       Overlay je přesně stejně
-       velký jako obrázek.
     ========================== */
 
     #overlay {
@@ -304,9 +297,7 @@
       .hint {
         display: none;
       }
-
     }
-
   </style>
 </head>
 
@@ -349,7 +340,7 @@
 
     <img
       id="sceneImage"
-      src="assets/d1.png?v=5"
+      src="assets/d1.png?v=6"
       alt="Scéna hry"
     >
 
@@ -448,76 +439,41 @@
      NASTAVENÍ
   ========================================= */
 
-  const ASSET_VERSION =
-    "6";
-
+  const ASSET_VERSION = "6";
 
   const sceneImage =
-    document.getElementById(
-      "sceneImage"
-    );
-
+    document.getElementById("sceneImage");
 
   const overlay =
-    document.getElementById(
-      "overlay"
-    );
-
+    document.getElementById("overlay");
 
   const debugBtn =
-    document.getElementById(
-      "debugBtn"
-    );
-
+    document.getElementById("debugBtn");
 
   const startScreen =
-    document.getElementById(
-      "startScreen"
-    );
-
+    document.getElementById("startScreen");
 
   const endScreen =
-    document.getElementById(
-      "endScreen"
-    );
-
+    document.getElementById("endScreen");
 
   const endTitle =
-    document.getElementById(
-      "endTitle"
-    );
-
+    document.getElementById("endTitle");
 
   const endText =
-    document.getElementById(
-      "endText"
-    );
-
+    document.getElementById("endText");
 
   const restartBtn =
-    document.getElementById(
-      "restartBtn"
-    );
-
+    document.getElementById("restartBtn");
 
   const closeEndBtn =
-    document.getElementById(
-      "closeEndBtn"
-    );
-
+    document.getElementById("closeEndBtn");
 
   const subtitle =
-    document.getElementById(
-      "subtitle"
-    );
+    document.getElementById("subtitle");
 
+  let debug = false;
 
-  let debug =
-    false;
-
-
-  let currentScene =
-    "d1";
+  let currentScene = "d1";
 
 
   /* =========================================
@@ -594,230 +550,412 @@
 
   const scenes = {
 
+
     /* ======================================
        KAPITOLA 1 – DÝMKÁRNA
     ====================================== */
 
     d1: {
+
       image: "assets/d1.png",
-      subtitle: "Kapitola 1 – Dýmkárna",
+
+      subtitle:
+        "Kapitola 1 – Dýmkárna",
+
       zones: [
+
         {
           ...ZONES.LEFT,
+
           action: () => {
+
             state.closeness += 1;
+
             loadScene("d2");
+
           }
         },
+
         {
           ...ZONES.MIDDLE,
+
           action: () => {
+
             state.closeness += 2;
+
             state.relationship += 1;
+
             loadScene("d2");
+
           }
         },
+
         {
           ...ZONES.RIGHT,
+
           action: () => {
+
             state.independence += 1;
+
             loadScene("d2");
+
           }
         }
+
       ]
+
     },
+
 
     d2: {
+
       image: "assets/d2.png",
-      subtitle: "Kapitola 1 – Před záchody",
+
+      subtitle:
+        "Kapitola 1 – Před záchody",
+
       zones: [
+
         {
           ...ZONES.LEFT,
+
           action: () => {
+
             state.closeness += 3;
+
             state.relationship += 2;
+
             state.trust += 1;
+
             loadScene("d3");
+
           }
         },
+
         {
           ...ZONES.MIDDLE,
+
           action: () => {
+
             state.trust += 1;
+
             loadScene("d4");
+
           }
         },
+
         {
           ...ZONES.RIGHT,
+
           action: () => {
+
             state.independence += 3;
+
             state.relationship -= 2;
+
             loadScene("d7");
+
           }
         }
+
       ]
+
     },
+
 
     d3: {
+
       image: "assets/d3.png",
-      subtitle: "Kapitola 1 – Před záchody",
+
+      subtitle:
+        "Kapitola 1 – Před záchody",
+
       zones: [
+
         {
           ...ZONES.CONTINUE_RIGHT,
+
           action: () => {
+
             state.closeness += 2;
+
             loadScene("d5");
+
           }
         }
+
       ]
+
     },
+
 
     d4: {
+
       image: "assets/d4.png",
-      subtitle: "Kapitola 1 – Před záchody",
+
+      subtitle:
+        "Kapitola 1 – Před záchody",
+
       zones: [
+
         {
           ...ZONES.LEFT,
+
           action: () => {
+
             state.closeness += 3;
+
             state.relationship += 2;
+
             loadScene("d3");
+
           }
         },
+
         {
           ...ZONES.MIDDLE,
+
           action: () => {
+
             state.trust += 2;
+
             loadScene("d5");
+
           }
         },
+
         {
           ...ZONES.RIGHT,
+
           action: () => {
+
             state.independence += 2;
+
             loadScene("d6");
+
           }
         }
+
       ]
+
     },
+
 
     d5: {
+
       image: "assets/d5.png",
-      subtitle: "Kapitola 1 – U stolu",
+
+      subtitle:
+        "Kapitola 1 – U stolu",
+
       zones: [
+
         {
           ...ZONES.LEFT,
+
           action: () => {
+
             state.relationship += 3;
+
             state.trust += 2;
+
             loadScene("d8");
+
           }
         },
+
         {
           ...ZONES.MIDDLE,
+
           action: () => {
+
             state.trust += 1;
+
             state.independence += 1;
+
             loadScene("d9");
+
           }
         },
+
         {
           ...ZONES.RIGHT,
+
           action: () => {
+
             state.independence += 3;
+
             state.relationship -= 1;
+
             loadScene("d6");
+
           }
         }
+
       ]
+
     },
+
 
     d6: {
+
       image: "assets/d6.png",
-      subtitle: "Kapitola 1 – U stolu",
+
+      subtitle:
+        "Kapitola 1 – U stolu",
+
       zones: [
+
         {
           ...ZONES.CONTINUE_CENTER,
+
           action: () => {
+
             loadScene("d9");
+
           }
         }
+
       ]
+
     },
+
 
     d7: {
+
       image: "assets/d7.png",
-      subtitle: "Kapitola 1 – Před záchody",
+
+      subtitle:
+        "Kapitola 1 – Před záchody",
+
       zones: [
+
         {
           ...ZONES.CONTINUE_RIGHT,
+
           action: () => {
+
             state.independence += 2;
+
             loadScene("d6");
+
           }
         }
+
       ]
+
     },
+
 
     d8: {
+
       image: "assets/d8.png",
-      subtitle: "Kapitola 1 – Konec večera",
+
+      subtitle:
+        "Kapitola 1 – Konec večera",
+
       zones: [
+
         {
           ...ZONES.CONTINUE_CENTER,
+
           action: () => {
+
             state.closeness += 1;
+
             loadScene("d10");
+
           }
         }
+
       ]
+
     },
+
 
     d9: {
+
       image: "assets/d9.png",
-      subtitle: "Kapitola 1 – Konec večera",
+
+      subtitle:
+        "Kapitola 1 – Konec večera",
+
       zones: [
+
         {
           ...ZONES.CONTINUE_CENTER,
+
           action: () => {
+
             loadScene("d10");
+
           }
         }
+
       ]
+
     },
 
+
     d10: {
+
       image: "assets/d10.png",
-      subtitle: "O pár dní později",
+
+      subtitle:
+        "O pár dní později",
+
       zones: [
+
         {
           ...ZONES.LEFT,
+
           action: () => {
+
             state.relationship += 2;
+
             state.trust += 1;
+
             loadScene("p1");
+
           }
         },
+
         {
           ...ZONES.MIDDLE,
+
           action: () => {
+
             state.trust += 1;
+
             state.independence += 1;
+
             loadScene("p1");
+
           }
         },
+
         {
           ...ZONES.RIGHT,
+
           action: () => {
+
             state.independence += 3;
+
             state.relationship -= 3;
+
             showEnding(
+
               "PŘÍBĚH, KTERÝ NEZAČAL",
+
               "Jarda se ještě chtěl potkat. Ty ses ale rozhodla jinak. První schůzka v Boskovicích se tentokrát nikdy nestala."
+
             );
+
           }
         }
+
       ]
+
     },
 
 
@@ -826,323 +964,643 @@
     ====================================== */
 
     p1: {
+
       image: "assets/p1.png",
-      subtitle: "Kapitola 2 – Poznávání se",
+
+      subtitle:
+        "Kapitola 2 – Poznávání se",
+
       zones: [
+
         {
           ...ZONES.LEFT,
+
           action: () => {
+
             state.closeness += 1;
+
             state.trust += 1;
+
             loadScene("p2");
+
           }
         },
+
         {
           ...ZONES.MIDDLE,
+
           action: () => {
+
             state.trust += 1;
+
             state.independence += 1;
+
             loadScene("p2");
+
           }
         },
+
         {
           ...ZONES.RIGHT,
+
           action: () => {
+
             state.closeness += 1;
+
             state.relationship += 1;
+
             loadScene("p2");
+
           }
         }
+
       ]
+
     },
 
-    /* ORLEN + KÁVA */
+
+    /* ======================================
+       P2 – ORLEN
+    ====================================== */
+
     p2: {
+
       image: "assets/p2.png",
-      subtitle: "Kapitola 2 – ORLEN Boskovice",
+
+      subtitle:
+        "Kapitola 2 – ORLEN Boskovice",
+
       zones: [
+
+        /* CHCI HO POZNAT VÍC */
+
         {
           ...ZONES.LEFT,
+
           action: () => {
+
             state.trust += 2;
+
             state.closeness += 1;
+
             loadScene("p3");
+
           }
         },
+
+        /* BUDU LEHCE FLIRTOVAT */
+
         {
           ...ZONES.MIDDLE,
+
           action: () => {
+
             state.closeness += 2;
+
             state.relationship += 2;
+
             loadScene("p3");
+
           }
         },
+
+        /* CHCI ZPĚT DOMŮ */
+
         {
           ...ZONES.RIGHT,
+
           action: () => {
+
             state.independence += 3;
-            state.relationship -= 2;
+
+            state.relationship -= 3;
+
             showEnding(
-              "PRVNÍ DOJEM NESTAČIL",
-              "Seděli jste spolu v autě na ORLENce, pili kávu a povídali si. Ale už během té schůzky jsi cítila, že z něj necítíš chlapa pro tebe. Nechala ses odvést domů a příběh tady skončil dřív, než se stačil opravdu rozjet."
+
+              "NEBYL TO ON",
+
+              "Seděli jste spolu na benzince, pili kávu a povídali si. Bylo to příjemné, ale něco ti chybělo. Necítila jsi v Jardovi chlapa, kterého bys chtěla poznávat dál. Nechala ses odvést domů a váš příběh skončil dřív, než se stačil pořádně rozjet."
+
             );
+
           }
         }
+
       ]
+
     },
+
+
+    /* ======================================
+       P3 – DELŠÍ POVÍDÁNÍ
+    ====================================== */
 
     p3: {
+
       image: "assets/p3.png",
-      subtitle: "Kapitola 2 – První opravdová schůzka",
+
+      subtitle:
+        "Kapitola 2 – První opravdová schůzka",
+
       zones: [
+
         {
           ...ZONES.LEFT,
+
           action: () => {
+
             state.trust += 2;
+
             loadScene("p4");
+
           }
         },
+
         {
           ...ZONES.MIDDLE,
+
           action: () => {
+
             state.trust += 3;
+
             state.relationship += 1;
+
             loadScene("p4");
+
           }
         },
+
         {
           ...ZONES.RIGHT,
+
           action: () => {
+
             state.closeness += 2;
+
             state.relationship += 2;
+
             loadScene("p4");
+
           }
         }
+
       ]
+
     },
+
+
+    /* ======================================
+       P4 – O PÁR TÝDNŮ POZDĚJI
+    ====================================== */
 
     p4: {
+
       image: "assets/p4.png",
-      subtitle: "O pár týdnů později",
+
+      subtitle:
+        "O pár týdnů později",
+
       zones: [
+
         {
           ...ZONES.CONTINUE_CENTER,
+
           action: () => {
+
             state.trust += 1;
+
             loadScene("p5");
+
           }
         }
+
       ]
+
     },
+
+
+    /* ======================================
+       P5 – TATARÁK
+    ====================================== */
 
     p5: {
+
       image: "assets/p5.png",
-      subtitle: "Kapitola 2 – Náš malý rituál",
+
+      subtitle:
+        "Kapitola 2 – Náš malý rituál",
+
       zones: [
+
         {
           ...ZONES.LEFT,
+
           action: () => {
+
             state.trust += 1;
+
             state.closeness += 1;
+
             loadScene("p6");
+
           }
         },
+
         {
           ...ZONES.MIDDLE,
+
           action: () => {
+
             state.closeness += 2;
+
             state.relationship += 2;
+
             loadScene("p6");
+
           }
         },
+
         {
           ...ZONES.RIGHT,
+
           action: () => {
+
             state.closeness += 3;
+
             state.relationship += 2;
+
             loadScene("p6");
+
           }
         }
+
       ]
+
     },
+
+
+    /* ======================================
+       P6 – PO VEČEŘI
+    ====================================== */
 
     p6: {
+
       image: "assets/p6.png",
-      subtitle: "Kapitola 2 – Večer ještě nekončí",
+
+      subtitle:
+        "Kapitola 2 – Večer ještě nekončí",
+
       zones: [
+
         {
           ...ZONES.LEFT,
+
           action: () => {
+
             state.closeness += 2;
+
             state.relationship += 1;
+
             loadScene("p7");
+
           }
         },
+
         {
           ...ZONES.MIDDLE,
+
           action: () => {
+
             state.trust += 2;
+
             state.closeness += 1;
+
             loadScene("p7");
+
           }
         },
+
         {
           ...ZONES.RIGHT,
+
           action: () => {
+
             state.relationship += 2;
+
             state.closeness += 2;
+
             loadScene("p7");
+
           }
         }
+
       ]
+
     },
+
+
+    /* ======================================
+       P7 – HŘBITOV
+    ====================================== */
 
     p7: {
+
       image: "assets/p7.png",
-      subtitle: "Kapitola 2 – Noční zastávka",
+
+      subtitle:
+        "Kapitola 2 – Noční zastávka",
+
       zones: [
+
         {
           ...ZONES.LEFT,
+
           action: () => {
+
             state.closeness += 2;
+
             state.relationship += 1;
+
             loadScene("p8");
+
           }
         },
+
         {
           ...ZONES.MIDDLE,
+
           action: () => {
+
             state.closeness += 3;
+
             state.relationship += 2;
+
             loadScene("p8");
+
           }
         },
+
         {
           ...ZONES.RIGHT,
+
           action: () => {
+
             state.trust += 1;
+
             state.closeness += 2;
+
             loadScene("p8");
+
           }
         }
+
       ]
+
     },
+
+
+    /* ======================================
+       P8 – ZAMLŽENÁ OKNA
+    ====================================== */
 
     p8: {
+
       image: "assets/p8.png",
-      subtitle: "Kapitola 2 – Zamlžená okna",
+
+      subtitle:
+        "Kapitola 2 – Zamlžená okna",
+
       zones: [
+
         {
           ...ZONES.CONTINUE_CENTER,
+
           action: () => {
+
             state.closeness += 2;
+
             state.relationship += 1;
+
             loadScene("p9");
+
           }
         }
+
       ]
+
     },
 
+
+    /* ======================================
+       P9 – KONEC KAPITOLY
+    ====================================== */
+
     p9: {
+
       image: "assets/p9.png",
-      subtitle: "Konec kapitoly 2",
+
+      subtitle:
+        "Konec kapitoly 2",
+
       zones: [
+
         {
           ...ZONES.CHAPTER_CENTER,
+
           action: () => {
+
             showEnding(
+
               "KAPITOLA 3 ODEMČENA",
+
               "Z pravidelných večerů se pomalu stává něco víc. Další kapitola začne prvním společným přespáním v Boskovicích."
+
             );
+
           }
         }
+
       ]
+
     }
 
   };
 
 
+  /* =========================================
+     FUNKCE
+  ========================================= */
+
   function applyZoneStyle(element, zone) {
-    element.style.left = zone.left + "%";
-    element.style.top = zone.top + "%";
-    element.style.width = zone.width + "%";
-    element.style.height = zone.height + "%";
+
+    element.style.left =
+      zone.left + "%";
+
+    element.style.top =
+      zone.top + "%";
+
+    element.style.width =
+      zone.width + "%";
+
+    element.style.height =
+      zone.height + "%";
+
   }
 
 
   function renderZones(zoneList) {
+
     overlay.innerHTML = "";
 
     zoneList.forEach(zone => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "zone";
+
+      const button =
+        document.createElement("button");
+
+      button.type =
+        "button";
+
+      button.className =
+        "zone";
 
       if (debug) {
-        button.classList.add("debug");
+
+        button.classList.add(
+          "debug"
+        );
+
       }
 
-      applyZoneStyle(button, zone);
-      button.addEventListener("click", zone.action);
-      overlay.appendChild(button);
+      applyZoneStyle(
+        button,
+        zone
+      );
+
+      button.addEventListener(
+        "click",
+        zone.action
+      );
+
+      overlay.appendChild(
+        button
+      );
+
     });
+
   }
 
 
   function loadScene(sceneKey) {
-    const scene = scenes[sceneKey];
+
+    const scene =
+      scenes[sceneKey];
 
     if (!scene) {
-      console.error("Scéna neexistuje:", sceneKey);
+
+      console.error(
+        "Scéna neexistuje:",
+        sceneKey
+      );
+
       return;
+
     }
 
-    currentScene = sceneKey;
+    currentScene =
+      sceneKey;
 
     sceneImage.src =
-      scene.image + "?v=" + ASSET_VERSION;
+      scene.image
+      +
+      "?v="
+      +
+      ASSET_VERSION;
 
     subtitle.textContent =
       scene.subtitle;
 
-    renderZones(scene.zones);
+    renderZones(
+      scene.zones
+    );
+
   }
 
 
   function showEnding(title, text) {
-    endTitle.textContent = title;
-    endText.textContent = text;
-    endScreen.classList.remove("hidden");
+
+    endTitle.textContent =
+      title;
+
+    endText.textContent =
+      text;
+
+    endScreen.classList.remove(
+      "hidden"
+    );
+
   }
 
 
   function restartGame() {
+
     state.closeness = 0;
+
     state.trust = 0;
+
     state.independence = 0;
+
     state.relationship = 0;
 
-    currentScene = "d1";
-    overlay.innerHTML = "";
+    currentScene =
+      "d1";
+
+    overlay.innerHTML =
+      "";
 
     sceneImage.src =
-      "assets/d1.png?v=" + ASSET_VERSION;
+      "assets/d1.png?v="
+      +
+      ASSET_VERSION;
 
     subtitle.textContent =
       "Kapitola 1 – Dýmkárna";
 
-    endScreen.classList.add("hidden");
-    startScreen.classList.remove("hidden");
+    endScreen.classList.add(
+      "hidden"
+    );
+
+    startScreen.classList.remove(
+      "hidden"
+    );
+
   }
 
 
+  /* =========================================
+     START
+  ========================================= */
+
   document
     .getElementById("startBtn")
-    .addEventListener("click", () => {
-      startScreen.classList.add("hidden");
-      loadScene("d1");
-    });
+    .addEventListener(
+      "click",
+      () => {
 
+        startScreen.classList.add(
+          "hidden"
+        );
+
+        loadScene(
+          "d1"
+        );
+
+      }
+    );
+
+
+  /* =========================================
+     RESTART
+  ========================================= */
 
   restartBtn.addEventListener(
     "click",
@@ -1150,31 +1608,58 @@
   );
 
 
+  /* =========================================
+     ZPĚT Z ENDINGU
+  ========================================= */
+
   closeEndBtn.addEventListener(
     "click",
     () => {
-      endScreen.classList.add("hidden");
+
+      endScreen.classList.add(
+        "hidden"
+      );
+
     }
   );
 
 
+  /* =========================================
+     DEBUG
+  ========================================= */
+
   function updateDebug() {
+
     debugBtn.textContent =
       debug
-      ? "Debug zóny: zapnuto"
-      : "Debug zóny: vypnuto";
+      ?
+      "Debug zóny: zapnuto"
+      :
+      "Debug zóny: vypnuto";
 
-    document.querySelectorAll(".zone").forEach(zone => {
-      zone.classList.toggle("debug", debug);
-    });
+    document
+      .querySelectorAll(".zone")
+      .forEach(zone => {
+
+        zone.classList.toggle(
+          "debug",
+          debug
+        );
+
+      });
+
   }
 
 
   debugBtn.addEventListener(
     "click",
     () => {
-      debug = !debug;
+
+      debug =
+        !debug;
+
       updateDebug();
+
     }
   );
 
@@ -1182,25 +1667,71 @@
   document.addEventListener(
     "keydown",
     event => {
-      if (event.key.toLowerCase() === "d") {
-        debug = !debug;
+
+      if (
+        event.key.toLowerCase()
+        ===
+        "d"
+      ) {
+
+        debug =
+          !debug;
+
         updateDebug();
+
       }
+
     }
   );
 
 
+  /* =========================================
+     PRELOAD
+  ========================================= */
+
   const imageFiles = [
-    "d1.png","d2.png","d3.png","d4.png","d5.png",
-    "d6.png","d7.png","d8.png","d9.png","d10.png",
-    "p1.png","p2.png","p3.png","p4.png","p5.png",
-    "p6.png","p7.png","p8.png","p9.png"
+
+    "d1.png",
+    "d2.png",
+    "d3.png",
+    "d4.png",
+    "d5.png",
+    "d6.png",
+    "d7.png",
+    "d8.png",
+    "d9.png",
+    "d10.png",
+
+    "p1.png",
+    "p2.png",
+    "p3.png",
+    "p4.png",
+    "p5.png",
+    "p6.png",
+    "p7.png",
+    "p8.png",
+    "p9.png"
+
   ];
 
-  imageFiles.forEach(file => {
-    const image = new Image();
-    image.src = "assets/" + file + "?v=" + ASSET_VERSION;
-  });
+
+  imageFiles.forEach(
+    file => {
+
+      const image =
+        new Image();
+
+      image.src =
+        "assets/"
+        +
+        file
+        +
+        "?v="
+        +
+        ASSET_VERSION;
+
+    }
+  );
 
 </script>
 

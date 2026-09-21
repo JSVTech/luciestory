@@ -26,15 +26,11 @@
 
     .app {
       min-height: 100vh;
-
       display: flex;
       flex-direction: column;
-
       justify-content: center;
       align-items: center;
-
       padding: 12px;
-
       gap: 10px;
     }
 
@@ -44,13 +40,10 @@
 
     .topbar {
       width: min(1672px, 100%);
-
       display: flex;
       justify-content: space-between;
       align-items: center;
-
       gap: 12px;
-
       flex-wrap: wrap;
     }
 
@@ -61,22 +54,16 @@
 
     .subtitle {
       margin-top: 3px;
-
       font-size: 13px;
-
       color: #9ca3af;
     }
 
     .debug-btn {
       border: 1px solid #374151;
-
       background: #111827;
       color: white;
-
       padding: 9px 13px;
-
       border-radius: 9px;
-
       cursor: pointer;
     }
 
@@ -90,31 +77,20 @@
 
     .stage {
       position: relative;
-
       width: min(1672px, 100%);
-
       background: black;
-
       overflow: hidden;
-
       border-radius: 12px;
-
-      box-shadow:
-        0 20px 60px rgba(0,0,0,.5);
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
     }
 
     #sceneImage {
       position: relative;
-
       display: block;
-
       width: 100%;
       height: auto;
-
       background: black;
-
       user-select: none;
-
       -webkit-user-drag: none;
     }
 
@@ -124,30 +100,22 @@
 
     #overlay {
       position: absolute;
-
       inset: 0;
-
       z-index: 10;
     }
 
     .zone {
       position: absolute;
-
       border: 0;
-
       padding: 0;
       margin: 0;
-
       background: transparent;
-
       cursor: pointer;
     }
 
     .zone.debug {
       outline: 3px dashed #ff3030;
-
-      background:
-        rgba(255, 48, 48, .22);
+      background: rgba(255, 48, 48, .22);
     }
 
     /* =========================
@@ -156,22 +124,14 @@
 
     .panel {
       position: absolute;
-
       inset: 0;
-
       z-index: 30;
-
       display: flex;
       align-items: center;
       justify-content: center;
-
       padding: 25px;
-
       text-align: center;
-
-      background:
-        rgba(4,7,15,.9);
-
+      background: rgba(4,7,15,.9);
       backdrop-filter: blur(5px);
     }
 
@@ -181,93 +141,61 @@
 
     .panel-box {
       width: min(700px, 100%);
-
       padding: 30px;
-
       border-radius: 16px;
-
-      background:
-        rgba(10,15,28,.96);
-
-      border:
-        1px solid rgba(255,255,255,.13);
-
-      box-shadow:
-        0 20px 60px rgba(0,0,0,.5);
+      background: rgba(10,15,28,.96);
+      border: 1px solid rgba(255,255,255,.13);
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
     }
 
     .panel-box h1 {
-      margin:
-        0 0 14px;
-
-      font-size:
-        clamp(32px, 6vw, 64px);
+      margin: 0 0 14px;
+      font-size: clamp(32px, 6vw, 64px);
     }
 
     .panel-box p {
       margin: 0;
-
       font-size: 17px;
-
       line-height: 1.6;
-
       color: #d1d5db;
     }
 
     .panel-actions {
       margin-top: 24px;
-
       display: flex;
-
       justify-content: center;
-
       gap: 12px;
-
       flex-wrap: wrap;
     }
 
     .panel-actions button {
       border: 0;
-
-      padding:
-        14px 21px;
-
+      padding: 14px 21px;
       border-radius: 11px;
-
       font-size: 16px;
-
       font-weight: bold;
-
       cursor: pointer;
     }
 
     .primary {
       background: #f3d56b;
-
       color: #111;
     }
 
     .secondary {
       background: #1f2937;
-
       color: white;
-
-      border:
-        1px solid #374151 !important;
+      border: 1px solid #374151 !important;
     }
 
     .hint {
       width: min(1672px, 100%);
-
       text-align: center;
-
       font-size: 12px;
-
       color: #6b7280;
     }
 
     @media (max-width: 700px) {
-
       .app {
         padding: 4px;
       }
@@ -286,7 +214,6 @@
 
       .debug-btn {
         font-size: 11px;
-
         padding: 7px 9px;
       }
 
@@ -305,23 +232,16 @@
 
 <div class="app">
 
-  <!-- HORNÍ LIŠTA -->
-
   <div class="topbar">
 
     <div>
-
       <div class="title">
         Lucčin příběh
       </div>
 
-      <div
-        class="subtitle"
-        id="subtitle"
-      >
+      <div class="subtitle" id="subtitle">
         Kapitola 1 – Dýmkárna
       </div>
-
     </div>
 
     <button
@@ -334,24 +254,21 @@
 
   </div>
 
-  <!-- HRA -->
 
   <div class="stage">
 
     <img
       id="sceneImage"
-      src="assets/d1.png?v=6"
+      src="assets/d1.png?v=8"
       alt="Scéna hry"
     >
 
     <div id="overlay"></div>
 
+
     <!-- START -->
 
-    <div
-      class="panel"
-      id="startScreen"
-    >
+    <div class="panel" id="startScreen">
 
       <div class="panel-box">
 
@@ -360,12 +277,11 @@
         </h1>
 
         <p>
-          Jeden večer.
+          Jeden příběh.
           <br>
-          Několik rozhodnutí.
+          Spousta rozhodnutí.
           <br>
-          A spousta možností,
-          jak mohl příběh pokračovat.
+          A několik možností, kam může všechno dojít.
         </p>
 
         <div class="panel-actions">
@@ -384,12 +300,10 @@
 
     </div>
 
-    <!-- END -->
 
-    <div
-      class="panel hidden"
-      id="endScreen"
-    >
+    <!-- ENDING -->
+
+    <div class="panel hidden" id="endScreen">
 
       <div class="panel-box">
 
@@ -425,9 +339,9 @@
 
   </div>
 
+
   <div class="hint">
-    Debug zobrazí červeně skutečná místa,
-    na která jde kliknout.
+    Debug zobrazí červeně skutečná místa, na která jde kliknout.
   </div>
 
 </div>
@@ -439,7 +353,7 @@
      NASTAVENÍ
   ========================================= */
 
-  const ASSET_VERSION = "6";
+  const ASSET_VERSION = "8";
 
   const sceneImage =
     document.getElementById("sceneImage");
@@ -470,6 +384,7 @@
 
   const subtitle =
     document.getElementById("subtitle");
+
 
   let debug = false;
 
@@ -1019,10 +934,6 @@
     },
 
 
-    /* ======================================
-       P2 – ORLEN
-    ====================================== */
-
     p2: {
 
       image: "assets/p2.png",
@@ -1091,10 +1002,6 @@
     },
 
 
-    /* ======================================
-       P3 – DELŠÍ POVÍDÁNÍ
-    ====================================== */
-
     p3: {
 
       image: "assets/p3.png",
@@ -1149,10 +1056,6 @@
     },
 
 
-    /* ======================================
-       P4 – O PÁR TÝDNŮ POZDĚJI
-    ====================================== */
-
     p4: {
 
       image: "assets/p4.png",
@@ -1178,10 +1081,6 @@
 
     },
 
-
-    /* ======================================
-       P5 – TATARÁK
-    ====================================== */
 
     p5: {
 
@@ -1239,10 +1138,6 @@
     },
 
 
-    /* ======================================
-       P6 – PO VEČEŘI
-    ====================================== */
-
     p6: {
 
       image: "assets/p6.png",
@@ -1298,10 +1193,6 @@
 
     },
 
-
-    /* ======================================
-       P7 – HŘBITOV
-    ====================================== */
 
     p7: {
 
@@ -1359,10 +1250,6 @@
     },
 
 
-    /* ======================================
-       P8 – ZAMLŽENÁ OKNA
-    ====================================== */
-
     p8: {
 
       image: "assets/p8.png",
@@ -1391,10 +1278,6 @@
     },
 
 
-    /* ======================================
-       P9 – KONEC KAPITOLY
-    ====================================== */
-
     p9: {
 
       image: "assets/p9.png",
@@ -1409,11 +1292,552 @@
 
           action: () => {
 
+            loadScene("b1");
+
+          }
+        }
+
+      ]
+
+    },
+
+
+    /* ======================================
+       KAPITOLA 3 – PRVNÍ PŘESPÁNÍ
+    ====================================== */
+
+
+    /* ======================================
+       B1 – BOWLING
+    ====================================== */
+
+    b1: {
+
+      image:
+        "assets/b1.png",
+
+      subtitle:
+        "Kapitola 3 – První přespání",
+
+      zones: [
+
+        {
+          ...ZONES.LEFT,
+
+          action: () => {
+
+            state.closeness += 1;
+
+            loadScene("b2");
+
+          }
+        },
+
+        {
+          ...ZONES.MIDDLE,
+
+          action: () => {
+
+            state.relationship += 1;
+
+            state.closeness += 1;
+
+            loadScene("b2");
+
+          }
+        },
+
+        {
+          ...ZONES.RIGHT,
+
+          action: () => {
+
+            state.independence += 1;
+
+            loadScene("b2");
+
+          }
+        }
+
+      ]
+
+    },
+
+
+    /* ======================================
+       B2 – POPRVÉ U JARDY DOMA + MAX
+    ====================================== */
+
+    b2: {
+
+      image:
+        "assets/b2.png",
+
+      subtitle:
+        "Kapitola 3 – Poprvé u Jardy doma",
+
+      zones: [
+
+        {
+          ...ZONES.LEFT,
+
+          action: () => {
+
+            state.trust += 1;
+
+            loadScene("b3");
+
+          }
+        },
+
+        {
+          ...ZONES.MIDDLE,
+
+          action: () => {
+
+            state.trust += 1;
+
+            loadScene("b3");
+
+          }
+        },
+
+        {
+          ...ZONES.RIGHT,
+
+          action: () => {
+
+            state.closeness += 1;
+
+            state.relationship += 1;
+
+            loadScene("b3");
+
+          }
+        }
+
+      ]
+
+    },
+
+
+    /* ======================================
+       B3 – VÍNO
+    ====================================== */
+
+    b3: {
+
+      image:
+        "assets/b3.png",
+
+      subtitle:
+        "Kapitola 3 – Víno a povídání",
+
+      zones: [
+
+        {
+          ...ZONES.LEFT,
+
+          action: () => {
+
+            state.closeness += 2;
+
+            state.relationship += 1;
+
+            loadScene("b4");
+
+          }
+        },
+
+        {
+          ...ZONES.MIDDLE,
+
+          action: () => {
+
+            state.trust += 2;
+
+            loadScene("b4");
+
+          }
+        },
+
+        {
+          ...ZONES.RIGHT,
+
+          action: () => {
+
+            state.independence += 1;
+
+            loadScene("b4");
+
+          }
+        }
+
+      ]
+
+    },
+
+
+    /* ======================================
+       B4 – GAUČ
+    ====================================== */
+
+    b4: {
+
+      image:
+        "assets/b4.png",
+
+      subtitle:
+        "Kapitola 3 – Gauč a televize",
+
+      zones: [
+
+        {
+          ...ZONES.LEFT,
+
+          action: () => {
+
+            state.closeness += 3;
+
+            state.relationship += 2;
+
+            loadScene("b5");
+
+          }
+        },
+
+        {
+          ...ZONES.MIDDLE,
+
+          action: () => {
+
+            state.closeness += 1;
+
+            state.trust += 2;
+
+            loadScene("b5");
+
+          }
+        },
+
+        {
+          ...ZONES.RIGHT,
+
+          action: () => {
+
+            state.independence += 2;
+
             showEnding(
 
-              "KAPITOLA 3 ODEMČENA",
+              "TEN VEČER ZŮSTAL JEN HEZKÝ",
 
-              "Z pravidelných večerů se pomalu stává něco víc. Další kapitola začne prvním společným přespáním v Boskovicích."
+              "Bylo ti s Jardou dobře, ale dál jsi jít nechtěla. Večer skončil klidně a první společná noc tentokrát nepřišla."
+
+            );
+
+          }
+        }
+
+      ]
+
+    },
+
+
+    /* ======================================
+       B5 – POLIBEK
+    ====================================== */
+
+    b5: {
+
+      image:
+        "assets/b5.png",
+
+      subtitle:
+        "Kapitola 3 – První polibek večera",
+
+      zones: [
+
+        {
+          ...ZONES.LEFT,
+
+          action: () => {
+
+            state.closeness += 3;
+
+            state.relationship += 2;
+
+            loadScene("b6");
+
+          }
+        },
+
+        {
+          ...ZONES.MIDDLE,
+
+          action: () => {
+
+            state.closeness += 3;
+
+            state.relationship += 3;
+
+            loadScene("b6");
+
+          }
+        },
+
+        {
+          ...ZONES.RIGHT,
+
+          action: () => {
+
+            state.trust += 1;
+
+            showEnding(
+
+              "PRO DNEŠEK TO STAČILO",
+
+              "Polibek byl příjemný, ale dál jsi pokračovat nechtěla. Jarda to respektoval a večer skončil bez dalšího posunu."
+
+            );
+
+          }
+        }
+
+      ]
+
+    },
+
+
+    /* ======================================
+       B6 – SPOLEČNÁ NOC
+    ====================================== */
+
+    b6: {
+
+      image:
+        "assets/b6.png",
+
+      subtitle:
+        "Kapitola 3 – První společná noc",
+
+      zones: [
+
+        {
+          ...ZONES.CONTINUE_CENTER,
+
+          action: () => {
+
+            state.closeness += 3;
+
+            state.relationship += 2;
+
+            state.trust += 1;
+
+            loadScene("b7");
+
+          }
+        }
+
+      ]
+
+    },
+
+
+    /* ======================================
+       B7 – SNÍDANĚ
+    ====================================== */
+
+    b7: {
+
+      image:
+        "assets/b7.png",
+
+      subtitle:
+        "Kapitola 3 – Zasněžené ráno",
+
+      zones: [
+
+        {
+          ...ZONES.LEFT,
+
+          action: () => {
+
+            state.relationship += 1;
+
+            loadScene("b8");
+
+          }
+        },
+
+        {
+          ...ZONES.MIDDLE,
+
+          action: () => {
+
+            state.closeness += 1;
+
+            loadScene("b8");
+
+          }
+        },
+
+        {
+          ...ZONES.RIGHT,
+
+          action: () => {
+
+            state.trust += 1;
+
+            loadScene("b8");
+
+          }
+        }
+
+      ]
+
+    },
+
+
+    /* ======================================
+       B8 – POPRVÉ U LUCKY
+    ====================================== */
+
+    b8: {
+
+      image:
+        "assets/b8.png",
+
+      subtitle:
+        "O pár dní později – Poprvé u Lucky",
+
+      zones: [
+
+        {
+          ...ZONES.LEFT,
+
+          action: () => {
+
+            state.relationship += 1;
+
+            state.trust += 1;
+
+            loadScene("b9");
+
+          }
+        },
+
+        {
+          ...ZONES.MIDDLE,
+
+          action: () => {
+
+            state.closeness += 1;
+
+            state.relationship += 1;
+
+            loadScene("b9");
+
+          }
+        },
+
+        {
+          ...ZONES.RIGHT,
+
+          action: () => {
+
+            state.independence += 1;
+
+            loadScene("b9");
+
+          }
+        }
+
+      ]
+
+    },
+
+
+    /* ======================================
+       B9 – KEBAB + VÍNO + DESÍTKA
+    ====================================== */
+
+    b9: {
+
+      image:
+        "assets/b9.png",
+
+      subtitle:
+        "Kapitola 3 – Večer u Lucky",
+
+      zones: [
+
+        {
+          ...ZONES.LEFT,
+
+          action: () => {
+
+            state.closeness += 1;
+
+            loadScene("b10");
+
+          }
+        },
+
+        {
+          ...ZONES.MIDDLE,
+
+          action: () => {
+
+            state.closeness += 2;
+
+            state.relationship += 1;
+
+            loadScene("b10");
+
+          }
+        },
+
+        {
+          ...ZONES.RIGHT,
+
+          action: () => {
+
+            state.trust += 1;
+
+            loadScene("b10");
+
+          }
+        }
+
+      ]
+
+    },
+
+
+    /* ======================================
+       B10 – ODCHOD OD LUCKY
+    ====================================== */
+
+    b10: {
+
+      image:
+        "assets/b10.png",
+
+      subtitle:
+        "Konec kapitoly 3",
+
+      zones: [
+
+        {
+          ...ZONES.CHAPTER_CENTER,
+
+          action: () => {
+
+            showEnding(
+
+              "KAPITOLA 4 ODEMČENA",
+
+              "Po první společné noci v Brně přišel první večer u Lucky. Z krátkých schůzek se začávalo stávat něco, co zabíralo čím dál větší kus vašich životů. Další kapitola: Víkend."
 
             );
 
@@ -1428,10 +1852,13 @@
 
 
   /* =========================================
-     FUNKCE
+     KLIKACÍ ZÓNY
   ========================================= */
 
-  function applyZoneStyle(element, zone) {
+  function applyZoneStyle(
+    element,
+    zone
+  ) {
 
     element.style.left =
       zone.left + "%";
@@ -1448,14 +1875,18 @@
   }
 
 
-  function renderZones(zoneList) {
+  function renderZones(
+    zoneList
+  ) {
 
     overlay.innerHTML = "";
 
     zoneList.forEach(zone => {
 
       const button =
-        document.createElement("button");
+        document.createElement(
+          "button"
+        );
 
       button.type =
         "button";
@@ -1490,7 +1921,13 @@
   }
 
 
-  function loadScene(sceneKey) {
+  /* =========================================
+     NAČTENÍ SCÉNY
+  ========================================= */
+
+  function loadScene(
+    sceneKey
+  ) {
 
     const scene =
       scenes[sceneKey];
@@ -1526,7 +1963,14 @@
   }
 
 
-  function showEnding(title, text) {
+  /* =========================================
+     ENDING
+  ========================================= */
+
+  function showEnding(
+    title,
+    text
+  ) {
 
     endTitle.textContent =
       title;
@@ -1540,6 +1984,10 @@
 
   }
 
+
+  /* =========================================
+     RESET
+  ========================================= */
 
   function restartGame() {
 
@@ -1686,7 +2134,7 @@
 
 
   /* =========================================
-     PRELOAD
+     PRELOAD OBRÁZKŮ
   ========================================= */
 
   const imageFiles = [
@@ -1710,7 +2158,18 @@
     "p6.png",
     "p7.png",
     "p8.png",
-    "p9.png"
+    "p9.png",
+
+    "b1.png",
+    "b2.png",
+    "b3.png",
+    "b4.png",
+    "b5.png",
+    "b6.png",
+    "b7.png",
+    "b8.png",
+    "b9.png",
+    "b10.png"
 
   ];
 

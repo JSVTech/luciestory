@@ -128,7 +128,6 @@
 
     .panel-box {
       width: min(720px, 100%);
-
       padding: 30px;
 
       background: rgba(9, 14, 27, .97);
@@ -143,67 +142,53 @@
 
     .panel-box h1 {
       margin: 0 0 16px;
-
       font-size: clamp(30px, 5vw, 58px);
     }
 
     .panel-box h2 {
       margin: 0 0 14px;
-
       font-size: clamp(23px, 4vw, 38px);
-
       color: #ff70bd;
     }
 
     .panel-box p {
       margin: 0;
-
       color: #d8dee9;
-
       font-size: 18px;
       line-height: 1.65;
     }
 
     .panel-actions {
       margin-top: 25px;
-
       display: flex;
       justify-content: center;
       gap: 12px;
-
       flex-wrap: wrap;
     }
 
     .panel-actions button {
       padding: 14px 22px;
-
       border-radius: 9px;
-
       font-size: 16px;
       font-weight: 700;
-
       cursor: pointer;
     }
 
     .primary {
       border: 1px solid #e5cf58;
-
       background: #e5cf58;
       color: #111827;
     }
 
     .secondary {
       border: 1px solid #374151;
-
       background: #1f2937;
       color: white;
     }
 
     .hint {
       width: min(1672px, 100%);
-
       text-align: center;
-
       font-size: 12px;
       color: #6b7280;
     }
@@ -227,7 +212,6 @@
 
       .debug-btn {
         padding: 7px 9px;
-
         font-size: 11px;
       }
 
@@ -257,9 +241,7 @@
   <div class="topbar">
 
     <div>
-      <div class="title">
-        Lucčin příběh
-      </div>
+      <div class="title">Lucčin příběh</div>
 
       <div
         class="subtitle"
@@ -284,7 +266,7 @@
 
     <img
       id="sceneImage"
-      src="assets/d1.png?v=20"
+      src="assets/d1.png?v=40"
       alt="Scéna hry"
     >
 
@@ -297,12 +279,9 @@
       class="panel"
       id="startScreen"
     >
-
       <div class="panel-box">
 
-        <h1>
-          Lucčin příběh
-        </h1>
+        <h1>Lucčin příběh</h1>
 
         <p>
           Jeden příběh.<br>
@@ -323,17 +302,15 @@
         </div>
 
       </div>
-
     </div>
 
 
-    <!-- MEZISCÉNA -->
+    <!-- MEZITEXT -->
 
     <div
       class="panel hidden"
       id="interludeScreen"
     >
-
       <div class="panel-box">
 
         <h2 id="interludeTitle">
@@ -355,17 +332,15 @@
         </div>
 
       </div>
-
     </div>
 
 
-    <!-- ENDING -->
+    <!-- GAME OVER -->
 
     <div
       class="panel hidden"
       id="endScreen"
     >
-
       <div class="panel-box">
 
         <h1 id="endTitle">
@@ -395,7 +370,36 @@
         </div>
 
       </div>
+    </div>
 
+
+    <!-- KONEC AKTUÁLNÍ KAPITOLY -->
+
+    <div
+      class="panel hidden"
+      id="chapterEndScreen"
+    >
+      <div class="panel-box">
+
+        <h1 id="chapterEndTitle">
+          Konec kapitoly
+        </h1>
+
+        <p id="chapterEndText"></p>
+
+        <div class="panel-actions">
+
+          <button
+            class="primary"
+            id="chapterEndClose"
+            type="button"
+          >
+            Pokračování příště
+          </button>
+
+        </div>
+
+      </div>
     </div>
 
   </div>
@@ -416,7 +420,7 @@
   ============================================================
   */
 
-  const ASSET_VERSION = "20";
+  const ASSET_VERSION = "40";
 
 
   const sceneImage =
@@ -455,6 +459,15 @@
   const endText =
     document.getElementById("endText");
 
+  const chapterEndScreen =
+    document.getElementById("chapterEndScreen");
+
+  const chapterEndTitle =
+    document.getElementById("chapterEndTitle");
+
+  const chapterEndText =
+    document.getElementById("chapterEndText");
+
 
   let debug = false;
 
@@ -479,11 +492,24 @@
 
     relationship: 0,
 
+    jardaUncertainty: 0,
+
     /*
-    To se nám bude hodit hlavně
-    v Kapitole 5 a 6.
+    DEFINICE VZTAHU Z PP9
+
+    situationship
+    relationship
+    friendship
     */
-    jardaUncertainty: 0
+
+    relationshipDefinition: null,
+
+    /*
+    ZDA LUCKA PO KRIZI NABÍDLA
+    VÍNO + PŘESPÁNÍ
+    */
+
+    stayedAfterCrisis: false
 
   };
 
@@ -514,6 +540,20 @@
       left: 67,
       top: 83,
       width: 31,
+      height: 15
+    },
+
+    TWO_LEFT: {
+      left: 16,
+      top: 83,
+      width: 33,
+      height: 15
+    },
+
+    TWO_RIGHT: {
+      left: 51,
+      top: 83,
+      width: 33,
       height: 15
     },
 
@@ -918,7 +958,7 @@
 
             state.trust += 1;
 
-            loadScene("p1");
+            loadScene("c2p1");
 
           }
         },
@@ -932,7 +972,7 @@
 
             state.independence += 1;
 
-            loadScene("p1");
+            loadScene("c2p1");
 
           }
         },
@@ -966,11 +1006,14 @@
     ==========================================================
     KAPITOLA 2
     POZNÁVÁNÍ SE
+
+    Obrázky:
+    assets/p1.png až assets/p9.png
     ==========================================================
     */
 
 
-    p1: {
+    c2p1: {
 
       image: "assets/p1.png",
 
@@ -988,7 +1031,7 @@
 
             state.trust += 1;
 
-            loadScene("p2");
+            loadScene("c2p2");
 
           }
         },
@@ -1002,7 +1045,7 @@
 
             state.independence += 1;
 
-            loadScene("p2");
+            loadScene("c2p2");
 
           }
         },
@@ -1016,7 +1059,7 @@
 
             state.relationship += 1;
 
-            loadScene("p2");
+            loadScene("c2p2");
 
           }
         }
@@ -1026,7 +1069,7 @@
     },
 
 
-    p2: {
+    c2p2: {
 
       image: "assets/p2.png",
 
@@ -1044,7 +1087,7 @@
 
             state.closeness += 1;
 
-            loadScene("p3");
+            loadScene("c2p3");
 
           }
         },
@@ -1058,7 +1101,7 @@
 
             state.relationship += 2;
 
-            loadScene("p3");
+            loadScene("c2p3");
 
           }
         },
@@ -1088,7 +1131,7 @@
     },
 
 
-    p3: {
+    c2p3: {
 
       image: "assets/p3.png",
 
@@ -1104,7 +1147,7 @@
 
             state.trust += 2;
 
-            loadScene("p4");
+            loadScene("c2p4");
 
           }
         },
@@ -1118,7 +1161,7 @@
 
             state.relationship += 1;
 
-            loadScene("p4");
+            loadScene("c2p4");
 
           }
         },
@@ -1132,7 +1175,7 @@
 
             state.relationship += 2;
 
-            loadScene("p4");
+            loadScene("c2p4");
 
           }
         }
@@ -1142,7 +1185,7 @@
     },
 
 
-    p4: {
+    c2p4: {
 
       image: "assets/p4.png",
 
@@ -1158,7 +1201,7 @@
 
             state.trust += 1;
 
-            loadScene("p5");
+            loadScene("c2p5");
 
           }
         }
@@ -1168,7 +1211,7 @@
     },
 
 
-    p5: {
+    c2p5: {
 
       image: "assets/p5.png",
 
@@ -1186,7 +1229,7 @@
 
             state.closeness += 1;
 
-            loadScene("p6");
+            loadScene("c2p6");
 
           }
         },
@@ -1200,7 +1243,7 @@
 
             state.relationship += 2;
 
-            loadScene("p6");
+            loadScene("c2p6");
 
           }
         },
@@ -1214,7 +1257,7 @@
 
             state.relationship += 2;
 
-            loadScene("p6");
+            loadScene("c2p6");
 
           }
         }
@@ -1224,7 +1267,7 @@
     },
 
 
-    p6: {
+    c2p6: {
 
       image: "assets/p6.png",
 
@@ -1242,7 +1285,7 @@
 
             state.relationship += 1;
 
-            loadScene("p7");
+            loadScene("c2p7");
 
           }
         },
@@ -1256,7 +1299,7 @@
 
             state.closeness += 1;
 
-            loadScene("p7");
+            loadScene("c2p7");
 
           }
         },
@@ -1270,7 +1313,7 @@
 
             state.closeness += 2;
 
-            loadScene("p7");
+            loadScene("c2p7");
 
           }
         }
@@ -1280,7 +1323,7 @@
     },
 
 
-    p7: {
+    c2p7: {
 
       image: "assets/p7.png",
 
@@ -1298,7 +1341,7 @@
 
             state.relationship += 1;
 
-            loadScene("p8");
+            loadScene("c2p8");
 
           }
         },
@@ -1312,7 +1355,7 @@
 
             state.relationship += 2;
 
-            loadScene("p8");
+            loadScene("c2p8");
 
           }
         },
@@ -1326,7 +1369,7 @@
 
             state.closeness += 2;
 
-            loadScene("p8");
+            loadScene("c2p8");
 
           }
         }
@@ -1336,7 +1379,7 @@
     },
 
 
-    p8: {
+    c2p8: {
 
       image: "assets/p8.png",
 
@@ -1354,7 +1397,7 @@
 
             state.relationship += 1;
 
-            loadScene("p9");
+            loadScene("c2p9");
 
           }
         }
@@ -1364,7 +1407,7 @@
     },
 
 
-    p9: {
+    c2p9: {
 
       image: "assets/p9.png",
 
@@ -1559,10 +1602,6 @@
 
       zones: [
 
-        /*
-        Sednu si k němu ještě blíž
-        */
-
         {
           ...ZONES.LEFT,
 
@@ -1577,10 +1616,6 @@
           }
         },
 
-        /*
-        Opřu se o něj
-        */
-
         {
           ...ZONES.MIDDLE,
 
@@ -1594,10 +1629,6 @@
 
           }
         },
-
-        /*
-        Zůstanu zatím u povídání
-        */
 
         {
           ...ZONES.RIGHT,
@@ -1650,10 +1681,6 @@
 
           }
         },
-
-        /*
-        Pro dnešek to nechám být
-        */
 
         {
           ...ZONES.RIGHT,
@@ -1733,10 +1760,6 @@
 
       zones: [
 
-        /*
-        Políbím ho znovu
-        */
-
         {
           ...ZONES.LEFT,
 
@@ -1751,10 +1774,6 @@
           }
         },
 
-        /*
-        Přesuneme se do ložnice
-        */
-
         {
           ...ZONES.MIDDLE,
 
@@ -1768,10 +1787,6 @@
 
           }
         },
-
-        /*
-        Pro dnešek to stačí
-        */
 
         {
           ...ZONES.RIGHT,
@@ -1952,11 +1967,6 @@
     },
 
 
-    /*
-    PÁTEČNÍ PŘÍJEZD
-    Všechny odpovědi vedou na večerní procházku.
-    */
-
     v2: {
 
       image: "assets/v2.png",
@@ -2008,13 +2018,6 @@
 
     },
 
-
-    /*
-    VEČERNÍ PROCHÁZKA
-    1 -> V4
-    2 -> V5
-    3 -> V6
-    */
 
     v3: {
 
@@ -2070,10 +2073,6 @@
     },
 
 
-    /*
-    UKÁŽU MU HRAD
-    */
-
     v4: {
 
       image: "assets/v4.png",
@@ -2122,10 +2121,6 @@
     },
 
 
-    /*
-    PŘITISKNU SE K NĚMU BLÍŽ
-    */
-
     v5: {
 
       image: "assets/v5.png",
@@ -2134,10 +2129,6 @@
         "Kapitola 4 – Večerní procházka",
 
       zones: [
-
-        /*
-        Přiblížím se k němu
-        */
 
         {
           ...ZONES.LEFT,
@@ -2152,10 +2143,6 @@
 
           }
         },
-
-        /*
-        Zeptám se ho na něco
-        */
 
         {
           ...ZONES.MIDDLE,
@@ -2177,10 +2164,6 @@
           }
         },
 
-        /*
-        Budu si ten moment jen užívat
-        */
-
         {
           ...ZONES.RIGHT,
 
@@ -2197,10 +2180,6 @@
 
     },
 
-
-    /*
-    JEN SI TEN MOMENT UŽIJU
-    */
 
     v6: {
 
@@ -2252,15 +2231,6 @@
     },
 
 
-    /*
-    STORYTELLING
-    SPORTPARK
-    MINIGOLF
-    BOWLING
-    ŠIPKY
-    KULEČNÍK
-    */
-
     v7: {
 
       image: "assets/v7.png",
@@ -2289,12 +2259,6 @@
     },
 
 
-    /*
-    BRNO
-    BAR
-    ÚVOD
-    */
-
     v8: {
 
       image: "assets/v8.png",
@@ -2319,11 +2283,6 @@
     },
 
 
-    /*
-    HLAVNÍ OTÁZKA
-    "VY DVA JSTE SPOLU?"
-    */
-
     v9: {
 
       image: "assets/v9.png",
@@ -2334,7 +2293,7 @@
       zones: [
 
         /*
-        ANO, JSME SPOLU
+        Ano, jsme spolu.
         */
 
         {
@@ -2356,7 +2315,7 @@
         },
 
         /*
-        JSME JEN KAMARÁDI
+        Jsme jen kamarádi.
         */
 
         {
@@ -2374,7 +2333,7 @@
         },
 
         /*
-        NE, TO NEJSME
+        Ne, to nejsme.
         */
 
         {
@@ -2397,13 +2356,6 @@
 
     },
 
-
-    /*
-    ==========================================================
-    V10
-    ANO, JSME SPOLU
-    ==========================================================
-    */
 
     v10: {
 
@@ -2459,19 +2411,12 @@
     },
 
 
-    /*
-    ==========================================================
-    V11
-    JSME JEN KAMARÁDI
-    ==========================================================
-    */
-
     v11: {
 
       image: "assets/v11.png",
 
       subtitle:
-        "Kapitola 4 – Slova, která zůstala",
+        "Kapitola 4 – Jen kamarádi",
 
       zones: [
 
@@ -2520,25 +2465,14 @@
     },
 
 
-    /*
-    ==========================================================
-    V12
-    NE, TO NEJSME
-    ==========================================================
-    */
-
     v12: {
 
       image: "assets/v12.png",
 
       subtitle:
-        "Kapitola 4 – Ticho u stolu",
+        "Kapitola 4 – Ne, to nejsme",
 
       zones: [
-
-        /*
-        ZLEHČÍM TO ÚSMĚVEM
-        */
 
         {
           ...ZONES.LEFT,
@@ -2551,7 +2485,7 @@
 
               "Vypravěč",
 
-              "Zkusila ses to zlehčit úsměvem. Atmosféru to sice na chvíli uvolnilo, ale Jardovi ta věta stejně zůstala v hlavě.",
+              "Zkusila ses to zlehčit úsměvem. Moc to ale nepomohlo. Jardovi ta odpověď stejně zůstala v hlavě.",
 
               "v13"
 
@@ -2559,10 +2493,6 @@
 
           }
         },
-
-        /*
-        DODÁM, ŽE MI S NÍM JE DOBŘE
-        */
 
         {
           ...ZONES.MIDDLE,
@@ -2577,7 +2507,7 @@
 
               "Vypravěč",
 
-              "Dodala jsi, že ti s ním je dobře. Jardu to trochu uklidnilo, ale úplně to nesmazalo to, co před chvílí slyšel.",
+              "Dodala jsi, že ti s ním je dobře. Trochu to pomohlo, ale původní odpověď tím úplně nezmizela.",
 
               "v13"
 
@@ -2585,10 +2515,6 @@
 
           }
         },
-
-        /*
-        BEZ DALŠÍHO VYSVĚTLOVÁNÍ
-        */
 
         {
           ...ZONES.RIGHT,
@@ -2609,19 +2535,12 @@
     },
 
 
-    /*
-    ==========================================================
-    V13
-    SPOJENÍ NEGATIVNĚJŠÍCH VĚTVÍ
-    ==========================================================
-    */
-
     v13: {
 
       image: "assets/v13.png",
 
       subtitle:
-        "Kapitola 4 – Cestou domů",
+        "Kapitola 4 – Po večeru v baru",
 
       zones: [
 
@@ -2640,19 +2559,6 @@
     },
 
 
-    /*
-    ==========================================================
-    V14
-    FINÁLE KAPITOLY 4
-
-    Jarda:
-    "Byl to fajn víkend...
-    Budu se těšit na další víkend."
-
-    Dole jen Pokračovat.
-    ==========================================================
-    */
-
     v14: {
 
       image: "assets/v14.png",
@@ -2667,11 +2573,475 @@
 
           action: () => {
 
+            loadScene("pp1");
+
+          }
+        }
+
+      ]
+
+    },
+
+
+    /*
+    ==========================================================
+    KAPITOLA 5
+    PRVNÍ POCHYBY
+
+    NOVÉ OBRÁZKY:
+    assets/pp1.png až assets/pp10.png
+    ==========================================================
+    */
+
+
+    /*
+    Pondělí.
+    Jarda píše, jestli se chcete zase vidět.
+    */
+
+    pp1: {
+
+      image: "assets/pp1.png",
+
+      subtitle:
+        "Kapitola 5 – První pochyby",
+
+      zones: [
+
+        {
+          ...ZONES.CONTINUE_CENTER,
+
+          action: () => {
+
+            loadScene("pp2");
+
+          }
+        }
+
+      ]
+
+    },
+
+
+    /*
+    Lucka odešle:
+    "Vlastně jsem ti spíš chtěla říct,
+    že tohle asi fungovat nebude."
+
+    Jarda okamžitě volá.
+    */
+
+    pp2: {
+
+      image: "assets/pp2.png",
+
+      subtitle:
+        "Kapitola 5 – Odpověď",
+
+      zones: [
+
+        {
+          ...ZONES.CONTINUE_CENTER,
+
+          action: () => {
+
+            state.jardaUncertainty += 3;
+
+            loadScene("pp3");
+
+          }
+        }
+
+      ]
+
+    },
+
+
+    /*
+    Telefonát.
+    Chtěla to ukončit.
+    Nakonec schůzka ve středu.
+    */
+
+    pp3: {
+
+      image: "assets/pp3.png",
+
+      subtitle:
+        "Kapitola 5 – Telefonát",
+
+      zones: [
+
+        {
+          ...ZONES.CONTINUE_CENTER,
+
+          action: () => {
+
+            loadScene("pp4");
+
+          }
+        }
+
+      ]
+
+    },
+
+
+    /*
+    Středa.
+    Jarda sedí v autě.
+    Rozlučkové květiny.
+    */
+
+    pp4: {
+
+      image: "assets/pp4.png",
+
+      subtitle:
+        "Kapitola 5 – Před jejím bytem",
+
+      zones: [
+
+        {
+          ...ZONES.CONTINUE_CENTER,
+
+          action: () => {
+
+            loadScene("pp5");
+
+          }
+        }
+
+      ]
+
+    },
+
+
+    /*
+    HLAVNÍ KRIZOVÁ VOLBA
+
+    Zkusit to spolu dál
+    Vzdát to
+    */
+
+    pp5: {
+
+      image: "assets/pp5.png",
+
+      subtitle:
+        "Kapitola 5 – Po rozhovoru",
+
+      zones: [
+
+        /*
+        ZKUSIT TO SPOLU DÁL
+        */
+
+        {
+          ...ZONES.TWO_LEFT,
+
+          action: () => {
+
+            state.relationship += 4;
+
+            state.trust += 3;
+
+            state.closeness += 2;
+
+            state.jardaUncertainty -= 2;
+
+            loadScene("pp6");
+
+          }
+        },
+
+        /*
+        VZDÁT TO
+        SKUTEČNÝ KONEC HRY
+        */
+
+        {
+          ...ZONES.TWO_RIGHT,
+
+          action: () => {
+
+            state.independence += 5;
+
+            state.relationship -= 8;
+
             showEnding(
 
-              "KONEC KAPITOLY 4",
+              "KAŽDÝ SVOU CESTOU",
 
-              "Jenže ty máš pocit, že se vidíte moc často. Že to úplně vlastně necítíš a možná Jarda není to, co ve svém životě chceš."
+              "Řekli jste si všechno, co bylo potřeba. Jarda tentokrát odešel s květinami, které opravdu byly na rozloučenou. Váš společný příběh tady končí."
+
+            );
+
+          }
+        }
+
+      ]
+
+    },
+
+
+    /*
+    Po rozhodnutí pokračovat.
+
+    1. Víno + přespání
+    2. Nechat ho odjet domů
+    */
+
+    pp6: {
+
+      image: "assets/pp6.png",
+
+      subtitle:
+        "Kapitola 5 – Ještě jeden krok",
+
+      zones: [
+
+        /*
+        NABÍDNU MU VÍNO A PŘESPÁNÍ
+        */
+
+        {
+          ...ZONES.TWO_LEFT,
+
+          action: () => {
+
+            state.stayedAfterCrisis = true;
+
+            state.relationship += 2;
+
+            state.trust += 2;
+
+            state.closeness += 2;
+
+            loadScene("pp8");
+
+          }
+        },
+
+        /*
+        NECHÁM HO JET DOMŮ
+        */
+
+        {
+          ...ZONES.TWO_RIGHT,
+
+          action: () => {
+
+            state.stayedAfterCrisis = false;
+
+            state.trust += 1;
+
+            loadScene("pp7");
+
+          }
+        }
+
+      ]
+
+    },
+
+
+    /*
+    KRATŠÍ VĚTEV
+
+    Polibek na rozloučenou.
+    Potom předčasný konec kapitoly.
+    */
+
+    pp7: {
+
+      image: "assets/pp7.png",
+
+      subtitle:
+        "Kapitola 5 – Loučení",
+
+      zones: [
+
+        {
+          ...ZONES.CONTINUE_CENTER,
+
+          action: () => {
+
+            showChapterEnd(
+
+              "KONEC KAPITOLY 5",
+
+              "První pochyby málem všechno ukončily. Tentokrát jste se ale rozhodli dát tomu ještě šanci."
+
+            );
+
+          }
+        }
+
+      ]
+
+    },
+
+
+    /*
+    DELŠÍ VĚTEV
+
+    Víno.
+    Jarda:
+    "Na nás dva a letní zážitky."
+    */
+
+    pp8: {
+
+      image: "assets/pp8.png",
+
+      subtitle:
+        "Kapitola 5 – Na nás dva",
+
+      zones: [
+
+        {
+          ...ZONES.CONTINUE_CENTER,
+
+          action: () => {
+
+            state.relationship += 1;
+
+            state.closeness += 1;
+
+            loadScene("pp9");
+
+          }
+        }
+
+      ]
+
+    },
+
+
+    /*
+    BALKON
+
+    Jarda:
+    "Co vlastně jsme?"
+
+    3 možnosti.
+
+    Tyhle volby zatím nemění děj,
+    ale uloží se do state
+    pro pozdější ending.
+    */
+
+    pp9: {
+
+      image: "assets/pp9.png",
+
+      subtitle:
+        "Kapitola 5 – Co vlastně jsme?",
+
+      zones: [
+
+        /*
+        SITUATIONSHIP
+        */
+
+        {
+          ...ZONES.LEFT,
+
+          action: () => {
+
+            state.relationshipDefinition =
+              "situationship";
+
+            state.independence += 2;
+
+            state.jardaUncertainty += 2;
+
+            loadScene("pp10");
+
+          }
+        },
+
+        /*
+        MOŽNÁ VZTAH
+        */
+
+        {
+          ...ZONES.MIDDLE,
+
+          action: () => {
+
+            state.relationshipDefinition =
+              "relationship";
+
+            state.relationship += 4;
+
+            state.trust += 2;
+
+            state.jardaUncertainty -= 2;
+
+            loadScene("pp10");
+
+          }
+        },
+
+        /*
+        JEN TAKOVÉ KAMARÁDSTVÍ
+        */
+
+        {
+          ...ZONES.RIGHT,
+
+          action: () => {
+
+            state.relationshipDefinition =
+              "friendship";
+
+            state.relationship -= 2;
+
+            state.independence += 3;
+
+            state.jardaUncertainty += 3;
+
+            loadScene("pp10");
+
+          }
+        }
+
+      ]
+
+    },
+
+
+    /*
+    RÁNO.
+
+    Jarda odveze Lucku do práce.
+    Polibek.
+    Květiny nakonec nebyly na rozloučenou.
+
+    KONEC KAPITOLY.
+    */
+
+    pp10: {
+
+      image: "assets/pp10.png",
+
+      subtitle:
+        "Konec kapitoly 5 – Ráno",
+
+      zones: [
+
+        {
+          ...ZONES.CONTINUE_CENTER,
+
+          action: () => {
+
+            showChapterEnd(
+
+              "KONEC KAPITOLY 5",
+
+              "Včerejší květiny nakonec nebyly na rozloučenou. Příběh pokračuje."
 
             );
 
@@ -2850,7 +3220,7 @@
 
   /*
   ============================================================
-  ENDING
+  GAME OVER
   ============================================================
   */
 
@@ -2871,6 +3241,45 @@
       .remove("hidden");
 
   }
+
+
+  /*
+  ============================================================
+  KONEC KAPITOLY
+  ============================================================
+  */
+
+
+  function showChapterEnd(
+    title,
+    text
+  ) {
+
+    chapterEndTitle.textContent =
+      title;
+
+    chapterEndText.textContent =
+      text;
+
+    chapterEndScreen
+      .classList
+      .remove("hidden");
+
+  }
+
+
+  document
+    .getElementById("chapterEndClose")
+    .addEventListener(
+      "click",
+      () => {
+
+        chapterEndScreen
+          .classList
+          .add("hidden");
+
+      }
+    );
 
 
   /*
@@ -2919,6 +3328,12 @@
 
         state.jardaUncertainty = 0;
 
+        state.relationshipDefinition =
+          null;
+
+        state.stayedAfterCrisis =
+          false;
+
 
         currentScene =
           "d1";
@@ -2938,6 +3353,11 @@
 
 
         endScreen
+          .classList
+          .add("hidden");
+
+
+        chapterEndScreen
           .classList
           .add("hidden");
 
@@ -3052,7 +3472,7 @@
   const imageFiles = [
 
     /*
-    Chapter 1
+    KAPITOLA 1
     */
 
     "d1.png",
@@ -3068,7 +3488,7 @@
 
 
     /*
-    Chapter 2
+    KAPITOLA 2
     */
 
     "p1.png",
@@ -3083,7 +3503,7 @@
 
 
     /*
-    Chapter 3
+    KAPITOLA 3
     */
 
     "b1.png",
@@ -3101,7 +3521,7 @@
 
 
     /*
-    Chapter 4
+    KAPITOLA 4
     */
 
     "v1.png",
@@ -3117,7 +3537,24 @@
     "v11.png",
     "v12.png",
     "v13.png",
-    "v14.png"
+    "v14.png",
+
+
+    /*
+    KAPITOLA 5
+    PRVNÍ POCHYBY
+    */
+
+    "pp1.png",
+    "pp2.png",
+    "pp3.png",
+    "pp4.png",
+    "pp5.png",
+    "pp6.png",
+    "pp7.png",
+    "pp8.png",
+    "pp9.png",
+    "pp10.png"
 
   ];
 

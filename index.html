@@ -317,7 +317,10 @@
 
     relationshipDefinition: null,
     stayedAfterCrisis: false,
-    chapter6Relationship: null
+    chapter6Relationship: null,
+
+    housingReadiness: 0,
+    livingTogether: false
   };
 
   const ZONES = {
@@ -2304,7 +2307,7 @@
             showChapterEnd(
               "KONEC KAPITOLY 6",
               "Nečekaná dovolená skončila. Všechny tvoje volby zůstávají uložené pro další kapitoly a budoucí finish.",
-              null
+              "by1"
             );
           }
         }
@@ -2321,6 +2324,282 @@
             showChapterEnd(
               "KONEC KAPITOLY 6",
               "Nečekaná dovolená skončila. Všechny tvoje volby zůstávají uložené pro další kapitoly a budoucí finish.",
+              "by1"
+            );
+          }
+        }
+      ]
+    },
+
+
+    /* =======================================================
+       KAPITOLA 7 – BYDLENÍ
+       ======================================================= */
+
+    by1: {
+      image: "assets/by1.png",
+      subtitle: "Kapitola 7 – Bydlení",
+      zones: [
+        {
+          ...ZONES.LEFT,
+          action: () => {
+            state.trust += 1;
+            state.housingReadiness += 1;
+            loadScene("by2");
+          }
+        },
+        {
+          ...ZONES.MIDDLE,
+          action: () => {
+            state.relationship += 1;
+            state.housingReadiness += 2;
+            loadScene("by2");
+          }
+        },
+        {
+          ...ZONES.RIGHT,
+          action: () => {
+            state.independence += 1;
+            state.jardaUncertainty += 1;
+            state.housingReadiness -= 1;
+            loadScene("by2");
+          }
+        }
+      ]
+    },
+
+    by2: {
+      image: "assets/by2.png",
+      subtitle: "Kapitola 7 – Na Výsluní",
+      zones: [
+        {
+          ...ZONES.CONTINUE_CENTER,
+          action: () => {
+            state.closeness += 1;
+            state.housingReadiness += 1;
+            loadScene("by3");
+          }
+        }
+      ]
+    },
+
+    by3: {
+      image: "assets/by3.png",
+      subtitle: "Kapitola 7 – Představa domova",
+      zones: [
+        {
+          ...ZONES.LEFT,
+          action: () => {
+            state.relationship += 2;
+            state.closeness += 1;
+            state.housingReadiness += 2;
+            loadScene("by4");
+          }
+        },
+        {
+          ...ZONES.MIDDLE,
+          action: () => {
+            state.independence += 1;
+            state.jardaUncertainty += 1;
+            loadScene("by4");
+          }
+        },
+        {
+          ...ZONES.RIGHT,
+          action: () => {
+            state.closeness += 1;
+            state.housingReadiness += 1;
+            loadScene("by4");
+          }
+        }
+      ]
+    },
+
+    by4: {
+      image: "assets/by4.png",
+      subtitle: "Kapitola 7 – Otázka makléřky",
+      zones: [
+        {
+          ...ZONES.TWO_LEFT,
+          action: () => {
+            state.relationship += 3;
+            state.trust += 1;
+            state.housingReadiness += 2;
+            loadScene("by5");
+          }
+        },
+        {
+          ...ZONES.TWO_RIGHT,
+          action: () => {
+            state.independence += 2;
+            state.jardaUncertainty += 2;
+            state.housingReadiness += 1;
+            loadScene("by5");
+          }
+        }
+      ]
+    },
+
+    by5: {
+      image: "assets/by5.png",
+      subtitle: "Kapitola 7 – Po prohlídce",
+      zones: [
+        {
+          ...ZONES.LEFT,
+          action: () => {
+            state.relationship += 2;
+            state.closeness += 1;
+            state.housingReadiness += 2;
+            loadScene("by6");
+          }
+        },
+        {
+          ...ZONES.MIDDLE,
+          action: () => {
+            state.independence += 1;
+            loadScene("by6");
+          }
+        },
+        {
+          ...ZONES.RIGHT,
+          action: () => {
+            state.jardaUncertainty += 1;
+            state.housingReadiness -= 1;
+            loadScene("by6");
+          }
+        }
+      ]
+    },
+
+    by6: {
+      image: "assets/by6.png",
+      subtitle: "Kapitola 7 – Dobrá zpráva",
+      zones: [
+        {
+          ...ZONES.CONTINUE_CENTER,
+          action: () => loadScene("by7")
+        }
+      ]
+    },
+
+    by7: {
+      image: "assets/by7.png",
+      subtitle: "Kapitola 7 – Plány",
+      zones: [
+        {
+          ...ZONES.TWO_LEFT,
+          action: () => {
+            state.relationship += 2;
+            state.trust += 1;
+            state.housingReadiness += 2;
+            loadScene("by8");
+          }
+        },
+        {
+          ...ZONES.TWO_RIGHT,
+          action: () => {
+            state.independence += 1;
+            state.jardaUncertainty += 1;
+            loadScene("by8");
+          }
+        }
+      ]
+    },
+
+    by8: {
+      image: "assets/by8.png",
+      subtitle: "Kapitola 7 – Jedna noc",
+      zones: [
+        {
+          ...ZONES.CONTINUE_CENTER,
+          action: () => loadScene("by9")
+        }
+      ]
+    },
+
+    by9: {
+      image: "assets/by9.png",
+      subtitle: "Kapitola 7 – Ráno u snídaně",
+      zones: [
+        {
+          ...ZONES.LEFT,
+          action: () => {
+            state.relationship += 2;
+            state.trust += 2;
+            state.housingReadiness += 3;
+            loadScene("by10");
+          }
+        },
+        {
+          ...ZONES.MIDDLE,
+          action: () => {
+            state.independence += 2;
+            state.trust += 1;
+            state.jardaUncertainty += 2;
+            state.housingReadiness += 1;
+            loadScene("by10");
+          }
+        },
+        {
+          ...ZONES.RIGHT,
+          action: () => {
+            state.independence += 4;
+            state.relationship -= 8;
+            state.jardaUncertainty += 5;
+            state.housingReadiness -= 5;
+            loadScene("by11");
+          }
+        }
+      ]
+    },
+
+    by10: {
+      image: "assets/by10.png",
+      subtitle: "Kapitola 7 – Ujištění",
+      zones: [
+        {
+          ...ZONES.CONTINUE_CENTER,
+          action: () => {
+            state.trust += 2;
+            state.closeness += 2;
+            state.housingReadiness += 1;
+            loadScene("by12");
+          }
+        }
+      ]
+    },
+
+    by11: {
+      image: "assets/by11.png",
+      subtitle: "Kapitola 7 – Konec snu o bydlení",
+      zones: [
+        {
+          ...ZONES.CONTINUE_CENTER,
+          action: () => {
+            showEnding(
+              "KONEC HRY",
+              "Jarda se smutně zadíval z okna a přemýšlel, co udělal špatně. Ujistila jsi ho, že nic, ale to mu bohužel už nestačilo. Pochopil, že od společné budoucnosti čekáte každý něco jiného, a váš příběh tady skončil."
+            );
+          }
+        }
+      ]
+    },
+
+    by12: {
+      image: "assets/by12.png",
+      subtitle: "Konec kapitoly 7 – Nový začátek",
+      zones: [
+        {
+          ...ZONES.CONTINUE_CENTER,
+          action: () => {
+            state.livingTogether = true;
+            state.relationship += 3;
+            state.trust += 2;
+            state.housingReadiness += 2;
+
+            showChapterEnd(
+              "KONEC KAPITOLY 7",
+              "Nakonec jste byt opravdu vzali a oba jste tím začali úplně novou kapitolu svých životů — tentokrát už ne jen na víkendy, ale spolu doma.",
               null
             );
           }
@@ -2525,6 +2804,12 @@
         state.chapter6Relationship =
           null;
 
+        state.housingReadiness =
+          0;
+
+        state.livingTogether =
+          false;
+
         currentScene =
           "d1";
 
@@ -2636,7 +2921,10 @@
     "n8.png","n9.png","n10.png","n11.png","n12.png","n13.png","n14.png",
     "n15.png","n16.png","n17.png","n18.png","n19.png","n20.png","n21.png",
     "n22.png","n23.png","n24.png","n25.png","n26.png","n27.png","n28.png",
-    "n29.png","n30.png"
+    "n29.png","n30.png",
+
+    "by1.png","by2.png","by3.png","by4.png","by5.png","by6.png",
+    "by7.png","by8.png","by9.png","by10.png","by11.png","by12.png"
 
   ];
 

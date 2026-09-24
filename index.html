@@ -3499,18 +3499,7 @@
   document.getElementById("closeEndBtn").addEventListener("click", showMainMenu);
   menuBtn.addEventListener("click", showMainMenu);
 
-  fullscreenBtn.addEventListener("click", async () => {
-    try {
-      if (!document.fullscreenElement) {
-        await gameShell.requestFullscreen();
-      } else {
-        await document.exitFullscreen();
-      }
-    } catch (error) {
-      console.warn("Fullscreen není dostupný:", error);
-    }
-  });
-
+  
   function updateDebug() {
     debugBtn.textContent = debug ? "HITBOX ON" : "HITBOX";
     document.querySelectorAll(".zone").forEach(zone => {
